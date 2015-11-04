@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * @since 1.0, 30/10/2015
  */
-@RestController(value = "/user")
+@RestController
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
@@ -40,5 +41,16 @@ public class UserController {
     public @ResponseBody
     List<User> listAllUsers() {
         return this.accountService.listAll();
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "/list_error",method = RequestMethod.GET)
+    public @ResponseBody
+    List<User> listAllUsersWithError() throws Exception {
+        
+        throw new Exception("Aqui da erro seu cuzão");
     }
 }
