@@ -13,6 +13,10 @@ var LoginModule = angular.module("login", ['ngAnimate', 'ngCookies', 'ngTouch',
                 url: "/",
                 templateUrl: "views/modules/login/ui/login.jsp",
                 controller: LoginController
+            }).state('register', {
+                url: "/register",
+                templateUrl: "views/modules/login/ui/register.jsp",
+                controller: LoginController
             });
 
         })

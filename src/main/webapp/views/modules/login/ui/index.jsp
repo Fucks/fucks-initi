@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            Login.
+            {{title}}
         </header>
 
         <div ui-view ></div>
@@ -23,5 +23,6 @@
         <!-- Controllers do modulo -->
         <script type="text/javascript" src="<c:url value="/views/modules/login/login-main.js" />" ></script>
         <script type="text/javascript"  src="<c:url value="/views/modules/login/controller/login-controller.js" />" ></script>
+        <script type="text/javascript"  src="<c:url value="/views/modules/login/services/account-service.js" />" ></script>
     </body>
 </html>

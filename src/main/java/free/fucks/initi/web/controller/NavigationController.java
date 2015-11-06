@@ -2,6 +2,7 @@ package free.fucks.initi.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -14,28 +15,33 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class NavigationController {
 
+    @RequestMapping(value = "/")
+    public ModelAndView getDefault() {
+        return home();
+    }
+
     @RequestMapping("/home")
     public ModelAndView home() {
-        return new ModelAndView("home");
+        return new ModelAndView("modules/home/ui/index");
     }
-    
+
     @RequestMapping("/new-user")
-    public ModelAndView createUser(){
+    public ModelAndView createUser() {
         return new ModelAndView("form");
     }
-    
+
     @RequestMapping("/login")
-    public ModelAndView login(){
+    public ModelAndView login() {
         return new ModelAndView("modules/login/ui/index");
     }
-    
+
     @RequestMapping("/403")
-    public ModelAndView accessDenied(){
+    public ModelAndView accessDenied() {
         return new ModelAndView("403");
     }
-    
+
     @RequestMapping("/404")
-    public ModelAndView resourceNotFound(){
+    public ModelAndView resourceNotFound() {
         return new ModelAndView("404");
     }
 

@@ -28,5 +28,5 @@
             </button>
         </div>
     </form>
-    <footer><a href="#0">Create an account</a></footer>
+    <footer><a href="#" ng-click='goToRegister()'>Criar uma conta</a></footer>
 </div>

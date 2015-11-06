@@ -29,7 +29,7 @@ public class UserController {
      * @param user
      */
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public void createUser(@RequestBody User user) {
+    public void createUser(@RequestBody User user) throws Exception {
         this.accountService.insert(user);
     }
 
