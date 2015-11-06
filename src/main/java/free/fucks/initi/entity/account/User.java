@@ -7,6 +7,8 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,22 +35,29 @@ public class User extends AbstractEntity implements UserDetails{
     @Setter
     @JsonProperty
     @Column(nullable = false)
-    private String name;
+    private String firstName;
     
     @Getter
     @Setter
     @JsonProperty
     @Column(nullable = false)
+    private String lastName;
+    
+    @Getter
+    @Setter
+    @JsonProperty
+    @Column(nullable = false, unique = true)
     private String email;
     
     @Setter
     @JsonProperty
+    @Size(min = 8, message = "Senha deve conter no mínimo 8 caracteres.")
     @Column(nullable = false)
     private String password;
     
     @Setter
     @JsonProperty
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
     
     /**
@@ -58,16 +67,18 @@ public class User extends AbstractEntity implements UserDetails{
 
     }
 
-    public User(String name, String email, String password, String username) {
-        this.name = name;
+    public User(String firstName, String lastName, String email, String password, String username) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.username = username;
     }
 
-    public User(String name, String email, String password, String username, Long id) {
+    public User(String firstName, String lastName, String email, String password, String username, Long id) {
         super(id);
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.username = username;

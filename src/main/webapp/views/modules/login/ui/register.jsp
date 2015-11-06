@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<div class="register">
+<div id="register" class="register">
     <div class="row">
         <h5 class="center-align">
             Forneça seus dados para criação de conta
@@ -16,12 +16,14 @@
     <form name="registerForm">
         <div class="row">
             <div class="input-field col s12">
-                <input id="name" ng-model="currentRegisterer.name" required type="text">
-                <label for="name">Nome Completo</label>
-                <div role="alert">
-                    <span class="error" ng-show="registerForm.userName.$error.required">
-                        Required!</span>
-                </div>
+                <input id="firstname" ng-model="currentRegisterer.firstName" required type="text">
+                <label for="firstname">Nome </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="lastname" ng-model="currentRegisterer.lastName" required type="text" ng-class="{'invalid': registerForm.lastname.$valid}">
+                <label for="lastname">Sobrenome </label>
             </div>
         </div>
         <div class="row">

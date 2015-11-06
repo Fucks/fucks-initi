@@ -19,7 +19,7 @@
         <nav>
             <div class="nav-wrapper">
                 <header>
-                    <span class="truncate title">{{title}} <b>${pageContext.request.userPrincipal.principal.name}</b></span>
+                    <span class="truncate title">{{title}} <b>${pageContext.request.userPrincipal.principal.firstName}</b></span>
                     <a href="#" data-activates="mobile-demo" class="button-collapse waves-effect waves-block"><i class="zmdi zmdi-menu"></i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="${logoutUrl}" class="waves-effect waves-block" ><i class="zmdi zmdi-power"></i></a></li>

@@ -2,8 +2,6 @@
 
 function HomeController($rootScope, $scope, $state, $stateParams) {
 
-    //inicia os componentes dos estilos.
-    $(".button-collapse").sideNav();
     //States
 
     //Vars

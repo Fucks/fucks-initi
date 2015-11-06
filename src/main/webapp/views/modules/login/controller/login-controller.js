@@ -37,6 +37,8 @@ function LoginController($rootScope, $scope, $state, $stateParams, accountServic
                 $rootScope.title = "Registre-se";
                 $scope.currentRegisterer = {};
                 
+                Materialize.showStaggeredList('#register');
+                
                 break;
             }
             default :

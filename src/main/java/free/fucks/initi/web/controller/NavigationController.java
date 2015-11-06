@@ -2,7 +2,6 @@ package free.fucks.initi.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,15 +24,16 @@ public class NavigationController {
         return new ModelAndView("modules/home/ui/index");
     }
 
-    @RequestMapping("/new-user")
+    @RequestMapping("/user-module")
     public ModelAndView createUser() {
-        return new ModelAndView("form");
+        return new ModelAndView("modules/user/ui/index");
     }
 
     @RequestMapping("/login")
     public ModelAndView login() {
         return new ModelAndView("modules/login/ui/index");
     }
+    
 
     @RequestMapping("/403")
     public ModelAndView accessDenied() {

@@ -24,6 +24,9 @@ var HomeModule = angular.module("Home", ['ngAnimate', 'ngCookies', 'ngTouch',
             // to active whenever 'contacts.list' or one of its decendents is active.
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
+
+            //inicia os componentes dos estilos.
+            $(".button-collapse").sideNav();
         }
         );
 
