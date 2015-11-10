@@ -1,6 +1,8 @@
 'use strict';
 
-function UserController($rootScope, $scope, $state, $stateParams, userService) {
+function UserController($injector, $scope, $state, $stateParams, userService) {
+
+    $injector.invoke(AbstractController, this, {$scope: $scope});
 
     //States
 
@@ -8,6 +10,7 @@ function UserController($rootScope, $scope, $state, $stateParams, userService) {
     $scope.error;
     $scope.confirmPassword;
     $scope.users = [{}];
+    $scope.currentPage;
 
     /**
      * 
@@ -16,22 +19,27 @@ function UserController($rootScope, $scope, $state, $stateParams, userService) {
      * @returns {undefined}
      */
     $scope.init = function (toState, toParams) {
+        
         $scope.currentState = toState.name;
-        $rootScope.title = toState.title;
-        $rootScope.navigation = toState.navigation;
+        $scope.currentPage = {page: 0, limit: 15, query: "", content: []};
 
         $scope.loadUsers();
+
+        $('.tooltipped').tooltip({delay: 50});
+
     };
 
+    /**
+     * 
+     * @returns {undefined}
+     */
     $scope.loadUsers = function () {
-        userService.showUsers(0)
+        userService.showUsersByParams($scope.currentPage)
                 .then(function (response) {
-                    $scope.users = response;
+                    $scope.currentPage.content = response;
                 });
-    }
-
-    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        $scope.init(toState, toParams);
-    });
+                
+        $scope.currentPage.query = "";
+    };
 }
 ;

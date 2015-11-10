@@ -1,12 +1,14 @@
 package free.fucks.initi.config;
 
 import free.fucks.initi.config.data.PersistenceConfig;
+import free.fucks.initi.config.data.RepositoryRestConfig;
 import free.fucks.initi.config.security.SecurityConfig;
 import free.fucks.initi.config.web.WebMvcConfig;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -19,8 +21,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  * @since 1.0, 29/10/2015
  */
 @Configuration
+@EnableAspectJAutoProxy
 @ComponentScan("free.fucks.initi")
-@Import({WebMvcConfig.class, PersistenceConfig.class, SecurityConfig.class})
+@Import({WebMvcConfig.class, PersistenceConfig.class, SecurityConfig.class, RepositoryRestConfig.class})
 public class ApplicationConfig {
 
     private static final String MESSAGE_SOURCE_BASE_NAME = "i18n/messages";

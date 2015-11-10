@@ -28,6 +28,8 @@ public class ExceptionHandlingController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView handleError(HttpServletRequest req, Exception exception) {
 
+        exception.printStackTrace();
+        
         ModelAndView mav = new ModelAndView("500");
         mav.addObject("exception", exception.getMessage());
 

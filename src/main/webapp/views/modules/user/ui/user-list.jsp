@@ -3,39 +3,58 @@
     Created on : 06/11/2015, 10:26:47
     Author     : wellington.fucks
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="container valign-center">
-    <div class="row">
-        <div class="col s12 m12 l12 valign card-panel">
-            <h5 class="left-align">Usuários já cadastrados</h5>
-
-            <div class="row" ng-repeat="user in users" >
-                <div class="col s12 m12 l12">
-                    <div class="card-panel lighten-5 z-depth-1 waves-effect waves-block">
-                        <div class="valign-wrapper">
-                            <div class="col s2">
-                                <img src="resources/images/default_user.png"  height="50" width="50" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                            </div>
-                            <div class="col s10">
-                                <div class="col s10">
-                                    <label for="first_name">Nome: </label>
-                                    <span id="first_name" class="black-text">{{user.firstName}} {{user.lastName}}</span>
-                                </div>
-                                <div class="col s4">
-                                    <label for="username">Usuário: </label>
-                                    <span id="username">{{user.username}}</span>
-                                </div>
-                                <div class="col s8">
-                                    <label for="email">Email: </label>
-                                    <span id="email">{{user.email}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div>
+    <div class="row" style="margin-top: 10px ">
+        <div class="col s12 m6 l6">
+            <div class="input-field">
+                <i class="mdi-action-search prefix"></i>
+                <input id="icon_prefix" type="text" ng-model="currentPage.query" ng-keyup="$event.keyCode == 13 && loadUsers()" >
+                <label for="icon_prefix">Buscar por usuários</label>
+            </div>
+        </div>
+        <div class="col s12 m6 l6 ">
+            <div class="input-field right">
+                <button class="waves-effect waves-light btn light-blue" ng-click="loadUsers()"><i class="mdi-content-filter-list left"></i><span class="hide-on-med-only">Filtrar</span></button>
+                <button class="waves-effect waves-light btn light-blue"><i class="mdi-file-file-download left"></i><span class="hide-on-med-only">Importar</span></button>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m12 l12 valign card-panel">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th data-field="firstname" class="grey-text text-darken-4" >Nome</th>
+                            <th data-field="username" class="grey-text text-darken-4" >Usuário</th>
+                            <th data-field="email" class="grey-text text-darken-4" >Email</th>
+                            <th data-field="actions"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in currentPage.content">
+                            <td width="40%">{{user.firstName}} {{user.lastName}}</td>
+                            <td width="20%">{{user.username}}</td>
+                            <td width="30%">{{user.email}}</td>
+                            <td width="15%">
+                                <i class="waves-effect material-icons blue-grey-text text-lighten-2" style="margin-right: 5px">mode_edit</i>
+                                <i class="waves-effect material-icons blue-grey-text text-lighten-2" style="margin-right: 5px">remove_circle</i>
+                                <i class="waves-effect material-icons blue-grey-text text-lighten-2">delete</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="currentPage.content.length == 0">
+                    <h5>Nenhum usuário encontrado.</h5>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large light-blue">
+            <i class="material-icons">add</i>
+        </a>
     </div>
 </div>

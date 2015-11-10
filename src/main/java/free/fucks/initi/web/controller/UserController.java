@@ -4,9 +4,12 @@ import free.fucks.initi.entity.account.User;
 import free.fucks.initi.service.AccountService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,29 +31,31 @@ public class UserController {
      *
      * @param user
      */
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) throws Exception {
         this.accountService.insert(user);
     }
 
     /**
      *
+     * @param filter
+     * @param page
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public @ResponseBody
-    List<User> listAllUsers() {
-        return this.accountService.listAll();
+    Page<User> listUsersByParams( @RequestParam("filter") String filter, Pageable page) {
+        return this.accountService.listByParams(filter, page);
     }
-    
+
     /**
      *
      * @return
      */
-    @RequestMapping(value = "/list_error",method = RequestMethod.GET)
+    @RequestMapping(value = "/list_error", method = RequestMethod.GET)
     public @ResponseBody
     List<User> listAllUsersWithError() throws Exception {
-        
+
         throw new Exception("Aqui da erro seu cuzão");
     }
 }

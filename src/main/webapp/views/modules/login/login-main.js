@@ -10,12 +10,14 @@ var LoginModule = angular.module("login", ['ngAnimate', 'ngCookies', 'ngTouch',
 
             // Use $stateProvider to configure your states.
             $stateProvider.state('login', {
-                url: "/",
+                url: '/',
                 templateUrl: "views/modules/login/ui/login.jsp",
+                title: 'Login',
                 controller: LoginController
             }).state('register', {
-                url: "/register",
-                templateUrl: "views/modules/login/ui/register.jsp",
+                url: '/register',
+                title: 'Registre-se',
+                templateUrl: 'views/modules/login/ui/register.jsp',
                 controller: LoginController
             });
 

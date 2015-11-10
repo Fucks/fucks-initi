@@ -12,3 +12,4 @@
 <!-- Lumx Material Dependencies -->
 <script src="<c:url value="/resources/js/jquery/jquery-1.11.3.min.js" />"></script>
 <script src="<c:url value="/resources/js/materialize/materialize.min.js" />"></script>
+<script src="<c:url value="/views/modules/abstract-controller.js" />" ></script>

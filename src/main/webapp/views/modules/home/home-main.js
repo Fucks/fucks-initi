@@ -12,6 +12,7 @@ var HomeModule = angular.module("Home", ['ngAnimate', 'ngCookies', 'ngTouch',
             $stateProvider.state('home', {
                 url: "/",
                 templateUrl: "views/modules/home/ui/home.jsp",
+                title: 'Bem vindo',
                 controller: HomeController
             });
 
