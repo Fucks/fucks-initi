@@ -7,6 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -19,6 +20,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  * @since 1.0, 29/10/2015
  */
 @Configuration
+@EnableAspectJAutoProxy
 @ComponentScan("free.fucks.initi")
 @Import({WebMvcConfig.class, PersistenceConfig.class, SecurityConfig.class})
 public class ApplicationConfig {
@@ -30,6 +32,16 @@ public class ApplicationConfig {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename(MESSAGE_SOURCE_BASE_NAME);
         messageSource.setUseCodeAsDefaultMessage(true);
+        
+        return messageSource;
+    }
+
+    @Bean
+    MessageSource fieldsMessageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("i18n/fields");
+        messageSource.setUseCodeAsDefaultMessage(true);
+        
         return messageSource;
     }
 

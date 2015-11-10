@@ -10,7 +10,7 @@ LoginModule.service('accountService', function ($http) {
                 },
                     function (errResponse) {
                         console.log(errResponse);
-                        return "Erro ao cadastrar usuário, " + errResponse.data.localizedMessage;
+                        return "Erro ao cadastrar usuário, " + errResponse.data.exception;
                     });
 }
 });

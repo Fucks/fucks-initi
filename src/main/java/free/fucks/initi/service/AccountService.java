@@ -3,7 +3,6 @@ package free.fucks.initi.service;
 import free.fucks.initi.entity.account.User;
 import free.fucks.initi.repository.IAccountRepository;
 import java.util.List;
-import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,9 @@
 package free.fucks.initi.web.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpStatus;
@@ -21,9 +24,7 @@ import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMeth
  */
 @ControllerAdvice("free.fucks.initi.web.controller")
 public class ExceptionHandlingController {
-
-    public final String DUPLICATED_REGISTER_ERROR = "duplicate key value violates unique constraint";
-
+    
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView handleError(HttpServletRequest req, Exception exception) {
@@ -58,19 +59,9 @@ public class ExceptionHandlingController {
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody
-    Exception handleInvalidConstraintErrors(HttpServletRequest req, DataIntegrityViolationException exception) {
+    String handleInvalidConstraintErrors(HttpServletRequest req, DataIntegrityViolationException exception) {
 
-        if (exception.getMostSpecificCause().getMessage().contains(DUPLICATED_REGISTER_ERROR)) {
-
-            int start = exception.getMostSpecificCause().getMessage().indexOf("Detalhe: Key (") + 14;
-            int end = exception.getMostSpecificCause().getMessage().indexOf(")=(");
-
-            String fieldError = exception.getMostSpecificCause().getMessage().substring(start, end);
-
-            return new Exception(fieldError + " já existe.");
-        }
-
-        return exception;
+        return "{\"exception\":\"" + exception.getMessage() + "\"}";
     }
 
     /**
