@@ -24,7 +24,6 @@ function LoginController($injector, $scope, $state, $stateParams, accountService
         switch ($scope.currentState) {
             case $scope.LOGIN_STATE:
             {
-                $rootScope.title = "Login";
                 $scope.error = $scope.getParameterByName("error");
                 $scope.logout = $scope.getParameterByName("logout");
 
@@ -36,7 +35,6 @@ function LoginController($injector, $scope, $state, $stateParams, accountService
             }
             case $scope.REGISTER_STATE:
             {
-                $rootScope.title = "Registre-se";
                 $scope.currentRegisterer = {};
 
                 Materialize.showStaggeredList('#register');
@@ -82,10 +80,6 @@ function LoginController($injector, $scope, $state, $stateParams, accountService
         }
 
     }
-
-    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        $scope.init(toState, toParams);
-    });
 
     $scope.getParameterByName = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);

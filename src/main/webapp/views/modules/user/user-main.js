@@ -1,22 +1,29 @@
 'use strict';
 
 var UserModule = angular.module("User", ['ngAnimate', 'ngCookies', 'ngTouch',
-    'ngSanitize', 'ui.router'])
+    'ngSanitize', 'ui.router', 'directive.loading'])
 
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
             // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
             $urlRouterProvider.otherwise('/');
 
             // Use $stateProvider to configure your states.
-            $stateProvider.state('user', {
+            $stateProvider
+            .state('users', {
                 url: "/",
                 templateUrl: "views/modules/user/ui/user-list.jsp",
                 title : 'Gerenciar usuários',
-                navigation : 'home',
+                navigation : '/home',
+                controller: UserController
+            }).state('users-insert', {
+                url : "/novo",
+                templateUrl: 'views/modules/user/ui/user-form.jsp',
+                title: 'Novo Usuário',
+                navigation: 'users',
                 controller: UserController
             });
-
+            
         })
         .run(function ($rootScope, $state, $stateParams) {
 

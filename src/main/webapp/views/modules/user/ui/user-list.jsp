@@ -24,7 +24,7 @@
     <div class="col s12 m12 l12 valign card-panel">
         <div class="row">
             <div class="col s12 m12 l12">
-                <table class="responsive-table">
+                <table>
                     <thead>
                         <tr>
                             <th data-field="firstname" class="grey-text text-darken-4" >Nome</th>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large light-blue">
+        <a class="btn-floating waves-effect waves-light btn-large light-blue" ng-click="changeToNew()">
             <i class="material-icons">add</i>
         </a>
     </div>
