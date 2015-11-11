@@ -21,34 +21,10 @@
             </div>
         </div>
     </div>
-    <div class="col s12 m12 l12 valign card-panel">
+    <div class="col s12 m12 l12 valign">
         <div class="row">
-            <div class="col s12 m12 l12">
-                <table>
-                    <thead>
-                        <tr>
-                            <th data-field="firstname" class="grey-text text-darken-4" >Nome</th>
-                            <th data-field="username" class="grey-text text-darken-4" >Usuário</th>
-                            <th data-field="email" class="grey-text text-darken-4" >Email</th>
-                            <th data-field="actions"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="user in currentPage.content">
-                            <td width="40%">{{user.firstName}} {{user.lastName}}</td>
-                            <td width="20%">{{user.username}}</td>
-                            <td width="30%">{{user.email}}</td>
-                            <td width="15%">
-                                <i class="waves-effect material-icons blue-grey-text text-lighten-2" style="margin-right: 5px">mode_edit</i>
-                                <i class="waves-effect material-icons blue-grey-text text-lighten-2" style="margin-right: 5px">remove_circle</i>
-                                <i class="waves-effect material-icons blue-grey-text text-lighten-2">delete</i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div ng-show="currentPage.content.length == 0">
-                    <h5>Nenhum usuário encontrado.</h5>
-                </div>
+            <div class="col s12 m12 l12 card-panel" style="padding: 0">
+                <jsp:include page="table.jsp" />
             </div>
         </div>
     </div>

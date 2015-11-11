@@ -61,6 +61,39 @@ header > .title{
     overflow: hidden;
     background-color: #e0e0e0;
 }
+.md-button.md-icon-button {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.md-button.md-icon-button > i {
+    margin: auto;
+}
+md-data-table-toolbar.ng-hide {
+    display: none;
+}
+md-data-table-toolbar.alternate {
+    color: #1e88e5;
+    background-color: #e3f2fd;
+}
+md-data-table-toolbar > .md-button.md-icon-button:last-child {
+    margin-right: -12px;
+}
+md-data-table-toolbar > form {
+    margin-left: 16px;
+}
+md-data-table-toolbar > form > input {
+    width: 100%;
+    margin: 0;
+    border: none;
+    color: rgba(0, 0, 0, 0.87);
+}
+md-data-table-toolbar > form > input:focus {
+    outline: none;
+}
 @media only screen and (min-width: 601px){
     nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
         height: 80px;

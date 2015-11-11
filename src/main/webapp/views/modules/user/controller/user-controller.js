@@ -15,7 +15,7 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
     $scope.confirmPassword;
     $scope.users = [{}];
     $scope.currentPage;
-    $scope.confirmPassword;
+    $scope.selected;
 
     /**
      * 
@@ -24,13 +24,13 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
      * @returns {undefined}
      */
     $scope.init = function (toState, toParams) {
-        $('.tooltipped').tooltip({delay: 50});
         var state = toState.name;
 
         switch (state) {
             case $scope.LIST_STATE:
             {
-                $scope.currentPage = {page: 0, limit: 15, query: "", content: []};
+                $scope.currentPage = {page: 0, limit: '8', query: "", content: []};
+                $scope.selected = new Array();
                 $scope.loadUsers();
 
                 break;
@@ -74,12 +74,17 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
     $scope.loadUsers = function () {
         userService.showUsersByParams($scope.currentPage)
                 .then(function (response) {
-                    $scope.currentPage.content = response;
+                    $scope.currentPage = response;
+                    $scope.currentPage.query = "";
+                    $scope.currentPage.pageNumber = response.number + 1;
                 });
 
-        $scope.currentPage.query = "";
     };
 
+    /**
+     * 
+     * @returns {undefined}
+     */
     $scope.insert = function () {
         if (!$scope.form.$valid) {
             Materialize.toast("Preencha todos os campos", 5000);
@@ -101,5 +106,37 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
         }
 
     };
+
+    /**
+     * GRID EVENTS
+     */
+
+    /**
+     * 
+     * @param {type} page
+     * @param {type} limit
+     * @returns {unresolved}
+     */
+    $scope.onPaginationChange = function (page, limit) {
+        $scope.currentPage.page = page - 1;
+        $scope.loadUsers();
+    };
+
+    /**
+     * 
+     * @param {type} $event
+     * @returns {undefined}
+     */
+    $scope.delete = function ($event) {
+        userService.deleteUsers($scope.selected).then(function success(response) {
+
+            Materialize.toast($scope.selected.length > 1 ? "Usuários excluidos" : "Usuário excluido", 5000);
+            $scope.selected = [];
+            $scope.loadUsers();
+
+        }, function error(response) {
+            Materialize.toast("Erro ao excluir usuários", 5000);
+        })
+    }
 }
 ;

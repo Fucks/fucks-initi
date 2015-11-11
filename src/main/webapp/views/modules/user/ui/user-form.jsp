@@ -37,7 +37,7 @@
                 <div class="section right">
                     <div class="col s12">
                         <a class="waves-effect waves-light btn light-blue" ng-click="insert()"><i class="material-icons left">save</i>salvar</a>
-                        <a class="waves-effect waves-light btn btn-flat" ng-click="changeToList()"><i class="material-icons left">cancel</i>cancelar</a>
+                        <a class="btn-orange btn-flat waves-effect waves-orange" ng-click="changeToList()"><i class="material-icons left">cancel</i>cancelar</a>
                     </div>
                 </div>
             </form>

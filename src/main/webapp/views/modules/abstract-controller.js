@@ -5,6 +5,7 @@
  */
 function AbstractController($rootScope, $scope, $state, $stateParams, $location) {
 
+
     $rootScope.goToBack = function (state) {
         //getting server URL
         var serverUrl = $location.absUrl().split($location.absUrl().split("/")[$location.absUrl().split("/").length - 2])[0];
@@ -25,6 +26,11 @@ function AbstractController($rootScope, $scope, $state, $stateParams, $location)
         $rootScope.navigation = toState.navigation;
 
         $scope.init(toState, toParams);
+    });
+    
+    //ativa js's
+    $(document).ready(function(){
+        $('.tooltipped').tooltip({delay: 50});
     });
 }
 ;

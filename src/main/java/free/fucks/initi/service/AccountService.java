@@ -23,47 +23,68 @@ public class AccountService {
 
     @Autowired
     private IAccountRepository accountRepository;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     /**
-     * 
+     *
      * @param user
-     * @return 
+     * @return
      */
-    public User insert(User user){
+    public User insert(User user) {
         String password = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
 
         return this.accountRepository.save(user);
     }
-    
+
     /**
-     * 
+     *
      * @param filter
      * @param page
-     * @return 
+     * @return
      */
     @Transactional(readOnly = true)
-    public Page<User> listByParams(String filter, Pageable page){
+    public Page<User> listByParams(String filter, Pageable page) {
         return this.accountRepository.listByParam(filter, page);
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     @Transactional(readOnly = true)
-    public List<User> listAll(){
+    public List<User> listAll() {
         return this.accountRepository.findAll();
     }
-    
+
     /**
-     * 
+     *
      * @param username
-     * @return 
+     * @return
      */
-    public User findUserByUsername(String username){
+    @Transactional(readOnly = true)
+    public User findUserByUsername(String username) {
         return this.accountRepository.findUserByUsername(username);
     }
+
+    /**
+     *
+     * @param users
+     */
+    public void delete(List<User> users) {
+        for (User user : users) {
+            this.accountRepository.delete(user);
+        }
+    }
+
+    /**
+     * 
+     * @param user 
+     */
+    public void delete(User user) {
+        this.accountRepository.delete(user);
+    }
+
 }

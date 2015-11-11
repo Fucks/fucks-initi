@@ -1,4 +1,4 @@
-package free.fucks.initi.entity.account;
+package free.fucks.initi.entity.account.roles;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -9,16 +9,18 @@ import org.springframework.security.core.GrantedAuthority;
  * @version 1.0
  * @since 1.0, 30/10/2015
  */
-public enum Role implements GrantedAuthority {
+public enum UserRole implements GrantedAuthority {
 
-    USER("Usuario"), ADMIN("Administrador");
+    
+    ROLE_USER("Usuário"),
+    ROLE_ADMIN("Administrador");
 
     private final String il18n;
 
-    private Role(String il18n) {
+    private UserRole(String il18n) {
         this.il18n = il18n;
     }
-    
+
     @Override
     public String getAuthority() {
         return this.il18n;

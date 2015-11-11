@@ -1,6 +1,7 @@
 package free.fucks.initi.entity.account;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import free.fucks.initi.entity.AbstractEntity;
 import java.util.Collection;
@@ -24,48 +25,42 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @since 1.0, 29/10/2015
  */
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(callSuper = true)
 @Table(name = "USUARIO", schema = "public")
 @EqualsAndHashCode(callSuper = true)
-@JsonAutoDetect
-public class User extends AbstractEntity implements UserDetails{
+public class User extends AbstractEntity implements UserDetails {
 
     @Getter
     @Setter
-    @JsonProperty
     @Column(nullable = false)
     private String firstName;
-    
+
     @Getter
     @Setter
-    @JsonProperty
     @Column(nullable = false)
     private String lastName;
-    
+
     @Getter
     @Setter
-    @JsonProperty
     @Column(nullable = false, unique = true)
     private String email;
-    
+
     @Setter
-    @JsonProperty
-    @Size(min = 8, message = "Senha deve conter no mínimo 8 caracteres.")
-    @Column(nullable = false)
+                @Column(nullable = false)
     private String password;
-    
+
     @Setter
-    @JsonProperty
     @Column(nullable = false, unique = true)
     private String username;
-    
+
     /**
-     * 
+     *
      */
-    public User(){
+    public User() {
 
     }
-    
+
     public User(Long id, String firstName, String lastName, String email, String username) {
         super(id);
         this.firstName = firstName;
@@ -74,7 +69,6 @@ public class User extends AbstractEntity implements UserDetails{
         this.password = password;
         this.username = username;
     }
-
 
     public User(String firstName, String lastName, String email, String password, String username) {
         this.firstName = firstName;
@@ -94,12 +88,12 @@ public class User extends AbstractEntity implements UserDetails{
     }
 
     /*
-        USER DETAILS METODOS
-    */
-    
+     USER DETAILS METODOS
+     */
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-         return AuthorityUtils.createAuthorityList("USER");
+        return AuthorityUtils.createAuthorityList("USER");
     }
 
     @Override
