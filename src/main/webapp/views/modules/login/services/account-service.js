@@ -6,11 +6,10 @@ LoginModule.service('accountService', function ($http) {
     this.register = function (account) {
         return $http.post('user/create', account)
                 .then(function (response) {
-                    return "Usuário Cadastrado!";
+                    return "{\"code\":" + response.status + ",\"msg\":\"Usuário Cadastrado!\"}";
                 },
-                    function (errResponse) {
-                        console.log(errResponse);
-                        return "Erro ao cadastrar usuário, " + errResponse.data.exception;
-                    });
-}
+                        function (errResponse) {
+                            return "{\"code\":500,\"msg\":\"Erro ao cadastrar usuário, " + errResponse.data.localizedMessage + "\"}";
+                        });
+    }
 });

@@ -4,8 +4,17 @@ UserModule.service('userService', function ($http) {
                 .then(function (response) {
                     return response.data;
                 },
-                    function (errResponse) {
-                        return errResponse;
-                    });
+                        function (errResponse) {
+                            return errResponse;
+                        });
+    }
+    this.showUsersByParams = function (page) {
+        return $http.get("user/list", {params:{'filter':page.query, 'page': page.page,'limit':page.limt}}, null)
+                .then(function (response) {
+                    return response.data.content;
+                },
+                        function (errResponse) {
+                            return errResponse;
+                        });
     }
 });

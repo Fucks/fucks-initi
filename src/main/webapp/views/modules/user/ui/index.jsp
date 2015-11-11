@@ -16,26 +16,18 @@
         <c:url value="/logout" var="logoutUrl" />
     </head>
     <body>
-        <nav>
-            <div class="nav-wrapper">
-                <header>
-                    <span class="truncate title">{{title}}</span>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse waves-effect waves-block"><i class="zmdi zmdi-menu"></i></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li><a href="${logoutUrl}" class="waves-effect waves-block" ><i class="zmdi zmdi-power"></i></a></li>
-                    </ul>
-                    <ul class="left hide-on-med-and-down">
-                        <li><a href="{{navigation}}" class="waves-effect waves-block" ><i class="zmdi zmdi-arrow-left"></i></a></li>
-                    </ul>
-                    <ul class="side-nav" id="mobile-demo">
-                        <li><a href="{{navigation}}" >Voltar</a></li>
-                        <li><a href="${logoutUrl}" >Sair</a></li>
-                    </ul>
-                </header>
+        <div class="row">
+            <div class="header">
+                <!-- HEADER -->
+                <jsp:include page="../../header.jsp" />
             </div>
-        </nav>
 
-        <div ui-view ></div>
+            <!-- Conteudo -->
+            <div class="row">
+                <div ui-view class="container" ></div>
+            </div>
+
+        </div>
 
         <jsp:include page="../../scripts.jsp" />
 

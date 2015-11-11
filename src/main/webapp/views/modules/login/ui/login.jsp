@@ -23,8 +23,8 @@
         <div class="form-group">
             <input id="stay-signed" type="checkbox" >
             <label for="stay-signed">Permanecer logado.</label>
-            <button class="btn waves-effect waves-light" type="submit">Entrar 
-                <i class="zmdi zmdi-mail-send"></i>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
+                <i class="material-icons right">send</i>
             </button>
         </div>
     </form>

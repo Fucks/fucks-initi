@@ -29,7 +29,10 @@ var UserModule = angular.module("User", ['ngAnimate', 'ngCookies', 'ngTouch',
             
 
             //inicia os componentes dos estilos.
-            $(".button-collapse").sideNav();
+            $(document).ready(function(){
+                $(".button-collapse").sideNav();
+                $(".dropdown-button").dropdown();
+            });
         }
         );
 

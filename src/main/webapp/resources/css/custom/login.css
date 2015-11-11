@@ -18,7 +18,6 @@ html, body
     width: 100%;
     background: rgb(243, 243, 243);
     color: rgba(0,0,0,0.6);
-    font-family: RobotoDraft,Roboto;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -231,6 +230,10 @@ body header {
 
 .form-group[errr] erroru, .form-group[errr] errorp  {
     opacity: 1;
+}
+
+button[type="button"] {
+    background: rgb(3, 169, 245);
 }
 
 button[type="submit"] {

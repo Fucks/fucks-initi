@@ -1,6 +1,12 @@
 'use strict';
 
-function HomeController($rootScope, $scope, $state, $stateParams) {
+function HomeController($injector, $scope, $state, $stateParams) {
+
+    /**
+     * Inject methods, attributes and states inherited of the AbstractCRUDController 
+     * @see AbstractCRUDController
+     */
+    $injector.invoke(AbstractController, this, {$scope: $scope});
 
     //States
 
@@ -16,11 +22,6 @@ function HomeController($rootScope, $scope, $state, $stateParams) {
      */
     $scope.init = function (toState, toParams) {
         $scope.currentState = toState.name;
-        $rootScope.title = "Bem vindo";
     };
-
-    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        $scope.init(toState, toParams);
-    });
 }
 ;
