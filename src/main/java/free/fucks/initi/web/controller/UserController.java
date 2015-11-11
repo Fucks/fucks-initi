@@ -35,19 +35,29 @@ public class UserController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) throws Exception {
-        this.accountService.insert(user);
+        this.accountService.save(user);
+    }
+    
+    /**
+     * 
+     * @param user
+     * @throws Exception 
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void updateUser(@RequestBody User user) throws Exception {
+        this.accountService.save(user);
     }
 
     /**
-     * 
-     * @param users 
+     *
+     * @param users
      */
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public void remove(@RequestBody List<User> users){
+    public void remove(@RequestBody List<User> users) {
         this.accountService.delete(users);
     }
-    
+
     /**
      *
      * @param filter
@@ -56,8 +66,19 @@ public class UserController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public @ResponseBody
-    Page<User> listUsersByParams( @RequestParam("filter") String filter, Pageable page) {
+    Page<User> listUsersByParams(@RequestParam("filter") String filter, Pageable page) {
         return this.accountService.listByParams(filter, page);
+    }
+
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public @ResponseBody
+    User findUser(@RequestParam("id") Long id) {
+        return this.accountService.findById(id);
     }
 
     /**

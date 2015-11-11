@@ -32,7 +32,7 @@ public class AccountService {
      * @param user
      * @return
      */
-    public User insert(User user) {
+    public User save(User user) {
         String password = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
 
@@ -67,6 +67,16 @@ public class AccountService {
     @Transactional(readOnly = true)
     public User findUserByUsername(String username) {
         return this.accountRepository.findUserByUsername(username);
+    }
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    @Transactional(readOnly = true)
+    public User findById(Long id){
+        return this.accountRepository.findOne(id);
     }
 
     /**

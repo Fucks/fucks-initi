@@ -12,13 +12,15 @@
                 <th name="Nome" order-by="firstName"></th>
                 <th name="E-mail" order-by="email"></th>
                 <th name="Usuário" order-by="username"></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr md-auto-select ng-repeat="entity in currentPage.content">
+            <tr ng-repeat="entity in currentPage.content">
                 <td>{{entity.firstName}} {{entity.lastName}}</td>
                 <td>{{entity.email}}</td>
                 <td>{{entity.username}}</td>
+                <td><a class="btn-flat waves-effect" style="padding: 0 10px;" ng-click="changeToEdit(entity.id)"><i class="material-icons">mode_edit</i></a></td>
             </tr>
         </tbody>
     </table>

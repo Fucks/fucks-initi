@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating waves-effect waves-light btn-large light-blue" ng-click="changeToNew()">
+        <a class="btn-floating waves-effect orange darken-3 waves-light btn-large" ng-click="changeToNew()">
             <i class="material-icons">add</i>
         </a>
     </div>

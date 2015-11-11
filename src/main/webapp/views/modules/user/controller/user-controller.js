@@ -7,8 +7,9 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
     //States
     $scope.LIST_STATE = "users";
     $scope.INSERT_STATE = "users-insert";
-    $scope.DETAIL_STATE = "detail";
-    $scope.DELETE_STATE = "delete";
+    $scope.EDIT_STATE = "users-edit";
+    $scope.DETAIL_STATE = "users-detail";
+    $scope.DELETE_STATE = "users-delete";
 
     //Vars
     $scope.error;
@@ -25,6 +26,7 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
      */
     $scope.init = function (toState, toParams) {
         var state = toState.name;
+        var params = toParams;
 
         switch (state) {
             case $scope.LIST_STATE:
@@ -41,6 +43,13 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
 
                 break;
             }
+            case $scope.EDIT_STATE:
+            {
+                $scope.findUser(params.id);
+
+                break;
+            }
+
             default :
             {
                 $state.go($scope.LIST_STATE);
@@ -48,6 +57,7 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
                 break;
             }
         }
+        $scope.currentState = state;
     };
 
     /**
@@ -69,6 +79,15 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
 
     /**
      * 
+     * @param {type} id
+     * @returns {undefined}
+     */
+    $scope.changeToEdit = function (id) {
+        $state.go($scope.EDIT_STATE, {id: id});
+    };
+
+    /**
+     * 
      * @returns {undefined}
      */
     $scope.loadUsers = function () {
@@ -83,6 +102,18 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
 
     /**
      * 
+     * @param {type} id
+     * @returns {undefined}
+     */
+    $scope.findUser = function (id) {
+        userService.findUser(id)
+                .then(function (response) {
+                    $scope.currentEntity = response;
+                });
+    };
+
+    /**
+     * 
      * @returns {undefined}
      */
     $scope.insert = function () {
@@ -93,6 +124,32 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
         if ($scope.currentEntity.password == $scope.confirmPassword && $scope.confirmPassword != null) {
 
             userService.register($scope.currentEntity)
+                    .then(function (response) {
+                        response = JSON.parse(response);
+                        Materialize.toast(response.msg, 5000);
+                        if (response.code == 200) {
+                            $state.go($scope.LIST_STATE);
+                        }
+                    });
+
+        } else {
+            Materialize.toast("Senha e confirmar senha devem ser iguais", 5000);
+        }
+
+    };
+
+    /**
+     * 
+     * @returns {undefined}
+     */
+    $scope.update = function () {
+        if (!$scope.form.$valid) {
+            Materialize.toast("Preencha todos os campos", 5000);
+            return;
+        }
+        if ($scope.currentEntity.password == $scope.confirmPassword && $scope.confirmPassword != null) {
+
+            userService.update($scope.currentEntity)
                     .then(function (response) {
                         response = JSON.parse(response);
                         Materialize.toast(response.msg, 5000);

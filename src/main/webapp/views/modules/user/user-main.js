@@ -22,6 +22,13 @@ var UserModule = angular.module("User", ['ngAnimate', 'ngCookies', 'ngTouch',
                 title: 'Novo Usuário',
                 navigation: 'users',
                 controller: UserController
+            })
+            .state('users-edit', {
+                url : "/editar/:id",
+                templateUrl: 'views/modules/user/ui/user-form.jsp',
+                title: 'Editar usuário',
+                navigation: 'users',
+                controller: UserController
             });
             
         })

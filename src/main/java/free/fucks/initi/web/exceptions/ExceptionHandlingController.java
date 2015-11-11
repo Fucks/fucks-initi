@@ -24,18 +24,16 @@ import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMeth
  */
 @ControllerAdvice("free.fucks.initi.web.controller")
 public class ExceptionHandlingController {
+    
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ModelAndView handleError(HttpServletRequest req, Exception exception) {
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ModelAndView handleError(HttpServletRequest req, Exception exception) {
-//
-//        exception.printStackTrace();
-//
-//        ModelAndView mav = new ModelAndView("500");
-//        mav.addObject("exception", exception.getMessage());
-//
-//        return mav;
-//    }
+        ModelAndView mav = new ModelAndView("500");
+        mav.addObject("exception", exception.getMessage());
+
+        return mav;
+    }
 
     /**
      * Handling exceptions de dados invalidos na persistencia de objetos.
@@ -44,12 +42,12 @@ public class ExceptionHandlingController {
      * @param exception
      * @return
      */
-//    @ExceptionHandler(InvalidDataAccessResourceUsageException.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ModelAndView handleInvalidDataErrors(HttpServletRequest req, InvalidDataAccessResourceUsageException exception) {
-//
-//        return new ModelAndView("500");
-//    }
+    @ExceptionHandler(InvalidDataAccessResourceUsageException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ModelAndView handleInvalidDataErrors(HttpServletRequest req, InvalidDataAccessResourceUsageException exception) {
+
+        return new ModelAndView("500");
+    }
 
     /**
      * Handling exceptions de Constrainsts
@@ -58,36 +56,36 @@ public class ExceptionHandlingController {
      * @param exception
      * @return
      */
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public @ResponseBody
-//    DataIntegrityViolationException handleInvalidConstraintErrors(HttpServletRequest req, DataIntegrityViolationException exception) {
-//
-//        return exception;
-//    }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody
+    String handleInvalidConstraintErrors(HttpServletRequest req, DataIntegrityViolationException exception) {
+
+        return "{\"exception\":\"" + exception.getMessage() + "\"}";
+    }
 
     /**
      *
      * @param ex
      * @return
      */
-//    @ExceptionHandler(NoSuchRequestHandlingMethodException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public ModelAndView handleException(NoSuchRequestHandlingMethodException ex) {
-//        ModelAndView mav = new ModelAndView("404");
-//        return mav;
-//    }
+    @ExceptionHandler(NoSuchRequestHandlingMethodException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView handleException(NoSuchRequestHandlingMethodException ex) {
+        ModelAndView mav = new ModelAndView("404");
+        return mav;
+    }
 
     /**
      *
      * @param ex
      * @return
      */
-//    @ExceptionHandler(NoHandlerFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public ModelAndView handleExceptiond(NoHandlerFoundException ex) {
-//        ModelAndView mav = new ModelAndView("404");
-//        return mav;
-//    }
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView handleExceptiond(NoHandlerFoundException ex) {
+        ModelAndView mav = new ModelAndView("404");
+        return mav;
+    }
 
 }

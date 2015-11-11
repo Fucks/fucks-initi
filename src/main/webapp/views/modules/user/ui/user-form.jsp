@@ -11,24 +11,35 @@
             <form name="form" class="col s12">
                 <div class="input-field col s12 m6">
                     <input id="firstname" ng-model="currentEntity.firstName" required type="text">
-                    <label for="firstname">Nome </label>
+                    <label for="firstname" ng-class="{
+                            'active'
+                            :currentState == EDIT_STATE}">Nome </label>
                 </div>
                 <div class="input-field col s12 m6">
                     <input id="lastname" ng-model="currentEntity.lastName" required type="text" ng-class="{
-                                'invalid': registerForm.lastname.$valid}">
-                    <label for="lastname">Sobrenome </label>
+                            'invalid'
+                            : registerForm.lastname.$valid}">
+                    <label for="lastname" ng-class="{
+                            'active'
+                            :currentState == EDIT_STATE}">Sobrenome </label>
                 </div>
                 <div class="input-field col s12 m6">
                     <input id="username" ng-model="currentEntity.username" required type="text">
-                    <label for="username">Usuário</label>
+                    <label for="username" ng-class="{
+                            'active'
+                            :currentState == EDIT_STATE}">Usuário</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <input id="email" ng-model="currentEntity.email" required type="text">
-                    <label for="email">E-mail</label>
+                    <label for="email" ng-class="{
+                            'active'
+                            :currentState == EDIT_STATE}">E-mail</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <input id="password" ng-model="currentEntity.password" required type="password">
-                    <label for="password">Senha</label>
+                    <label for="password" ng-class="{
+                            'active'
+                            :currentState == EDIT_STATE}">Senha</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <input id="confirm-password" ng-model="confirmPassword" required type="password">
@@ -36,7 +47,8 @@
                 </div>
                 <div class="section right">
                     <div class="col s12">
-                        <a class="waves-effect waves-light btn light-blue" ng-click="insert()"><i class="material-icons left">save</i>salvar</a>
+                        <a class="waves-effect waves-light btn light-blue" ng-show="currentState == EDIT_STATE" ng-click="update()"><i class="material-icons left">save</i>Atualizar</a>
+                        <a class="waves-effect waves-light btn light-blue" ng-show="currentState == INSERT_STATE" ng-click="insert()"><i class="material-icons left">save</i>salvar</a>
                         <a class="btn-orange btn-flat waves-effect waves-orange" ng-click="changeToList()"><i class="material-icons left">cancel</i>cancelar</a>
                     </div>
                 </div>

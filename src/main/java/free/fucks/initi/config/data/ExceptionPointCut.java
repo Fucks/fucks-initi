@@ -43,7 +43,8 @@ public class ExceptionPointCut {
      * @throws Throwable 
      */
     @Around("execution(* free.fucks.initi.service.*.insert*(..)) || "
-            + "execution(* free.fucks.initi.service.*.update*(..))")
+            + "execution(* free.fucks.initi.service.*.update*(..)) || "
+            + "execution(* free.fucks.initi.service.*.save*(..))")
     public Object doHandleDataIntegrityViolationException(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             LOG.info("------> Caiu no ASPECT!");
