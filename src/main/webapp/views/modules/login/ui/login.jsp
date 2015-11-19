@@ -10,7 +10,7 @@
     <form action="${loginUrl}" id="login-form" method="POST">
         <div class="row">
             <div class="input-field col s12">
-                <input id="username" name="username" type="text" ng-class="{'invalid' : error == 1}">
+                <input id="username" name="username" type="text" focus ng-class="{'invalid' : error == 1}">
                 <label for="username">Usuário</label>
             </div>
         </div>

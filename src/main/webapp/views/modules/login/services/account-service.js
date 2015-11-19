@@ -4,7 +4,7 @@
 LoginModule.service('accountService', function ($http) {
 
     this.register = function (account) {
-        return $http.post('user/create', account)
+        return $http.post('user/register', account)
                 .then(function (response) {
                     return "{\"code\":" + response.status + ",\"msg\":\"Usuário Cadastrado!\"}";
                 },

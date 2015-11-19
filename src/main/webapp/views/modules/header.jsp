@@ -7,35 +7,58 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<nav>
-    <c:url value="/logout" var="logoutUrl" />
-    <div class="nav-wrapper">
+<c:url value="/logout" var="logoutUrl" />
+<div class="nav-wrapper" ng-cloak>
+    <md-toolbar>
         <header>
-            <ul class="left hide-on-med-and-down">
-                <li>
-                    <a ng-click="goToBack(navigation)" class="waves-effect waves-block left hide-on-med-and-down"><i class="material-icons">arrow_back</i></a>
-                </li>
-            </ul>
-            <a href="#" data-activates="mobile-demo" class="button-collapse waves-effect waves-block left"><i class="mdi-navigation-menu"></i></a>
-            <span class="truncate title left">{{title}}</span>
-
-            <ul class="right hide-on-med-and-down">
-                <li><a class="dropdown-button" href="#!" data-activates="usersettings">${pageContext.request.userPrincipal.principal.firstName}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-            </ul>
-
-            <ul id="usersettings" class="dropdown-content">
-                <li><a href="#!">Perfil</a></li>
-                <li><a href="${logoutUrl}">Sair</a></li>
-            </ul>
-
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="{{navigation}}" >Voltar</a></li>
-                <li><a href="${logoutUrl}" >Sair</a></li>
-            </ul>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="goToBack(navigation)" class="md-icon-button" aria-label="Go Back">
+                    <imd-icon class="material-icons">arrow_back</imd-icon>
+                </md-button>
+                <span class="truncate title left hide-sm">{{title}}</span>
+                <span flex></span>
+                <md-menu class="md-menu" style="margin: 0;">
+                    <md-button class="md-button" 
+                               aria-label="Open user menu" 
+                               ng-click="$mdOpenMenu()" type="button" 
+                               aria-haspopup="true" 
+                               ng-transclude
+                               aria-expanded="false"
+                               style="height: 64px;top:-5px;">
+                        <img class="toolbar-user-avatar ng-scope" src="resources/images/default_user.png">
+                        <span class="ng-scope">
+                            ${pageContext.request.userPrincipal.principal.firstName}
+                        </span><div class="md-ripple-container"></div></md-button>
+                    <md-menu-content width="4" class="md-white-cyan-theme">
+                        <md-menu-item role="menuitem">
+                            <md-button class="md-button md-white-cyan-theme md-ink-ripple" ng-transclude="" ng-click="vm.toggleNotificationsTab(2)" aria-label="side navigation">
+                                <md-icon class="ng-scope ng-isolate-scope md-white-cyan-theme md-font zmdi zmdi-settings material-icons" aria-hidden="true">settings</md-icon>
+                                <span class="ng-scope">Opções</span>
+                                <div class="md-ripple-container"></div></md-button>
+                        </md-menu-item>
+                        <md-menu-item role="menuitem">
+                            <md-button class="md-button md-white-cyan-theme md-ink-ripple" ng-transclude="" href="#/profile" aria-label="side navigation">
+                                <md-icon md-font-icon="zmdi zmdi-account" class="ng-scope ng-isolate-scope md-white-cyan-theme md-font zmdi zmdi-account material-icons" aria-hidden="true">person</md-icon>
+                                <span class="ng-scope">Profile</span>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider role="separator"></md-menu-divider>
+                        <md-menu-item role="menuitem">
+                            <md-button class="md-button md-white-cyan-theme md-ink-ripple" ng-transclude="" href="${logoutUrl}" aria-label="side navigation">
+                                <md-icon class="ng-scope ng-isolate-scope md-white-cyan-theme md-font zmdi zmdi-sign-in material-icons" aria-hidden="true">exit_to_app</md-icon>
+                                <span  class="ng-scope">Sair</span>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
         </header>
-    </div>
-</nav>
-<style>
+
+    </md-toolbar>
+
+
+</div>
+<style type="text/css">
     .loader-background{
         top: 88px;
         bottom: 0;

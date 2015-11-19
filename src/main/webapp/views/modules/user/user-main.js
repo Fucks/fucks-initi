@@ -1,6 +1,6 @@
 'use strict';
 
-var UserModule = angular.module("User", ['ngAnimate', 'ngCookies', 'ngTouch',
+var UserModule = angular.module("User", ['System','ngAnimate', 'ngCookies', 'ngTouch',
     'ngSanitize', 'ui.router', 'directive.loading', 'ngMaterial', 'md.data.table'])
 
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -10,27 +10,27 @@ var UserModule = angular.module("User", ['ngAnimate', 'ngCookies', 'ngTouch',
 
             // Use $stateProvider to configure your states.
             $stateProvider
-            .state('users', {
-                url: "/",
-                templateUrl: "views/modules/user/ui/user-list.jsp",
-                title : 'Gerenciar usuários',
-                navigation : '/home',
-                controller: UserController
-            }).state('users-insert', {
-                url : "/novo",
+                    .state('users', {
+                        url: "/",
+                        templateUrl: "views/modules/user/ui/user-list.jsp",
+                        title: 'Gerenciar usuários',
+                        navigation: '/home',
+                        controller: UserController
+                    }).state('users-insert', {
+                url: "/novo",
                 templateUrl: 'views/modules/user/ui/user-form.jsp',
                 title: 'Novo Usuário',
                 navigation: 'users',
                 controller: UserController
             })
-            .state('users-edit', {
-                url : "/editar/:id",
-                templateUrl: 'views/modules/user/ui/user-form.jsp',
-                title: 'Editar usuário',
-                navigation: 'users',
-                controller: UserController
-            });
-            
+                    .state('users-edit', {
+                        url: "/editar/:id",
+                        templateUrl: 'views/modules/user/ui/user-form.jsp',
+                        title: 'Editar usuário',
+                        navigation: 'users',
+                        controller: UserController
+                    });
+
         })
         .run(function ($rootScope, $state, $stateParams) {
 
@@ -40,10 +40,10 @@ var UserModule = angular.module("User", ['ngAnimate', 'ngCookies', 'ngTouch',
             // to active whenever 'contacts.list' or one of its decendents is active.
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
-            
+
 
             //inicia os componentes dos estilos.
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $(".button-collapse").sideNav();
                 $(".dropdown-button").dropdown();
             });

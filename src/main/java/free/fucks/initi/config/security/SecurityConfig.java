@@ -24,19 +24,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @PropertySource("classpath:security.properties")
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationService authenticationService;
-    
+
     @Autowired
     private Environment environment;
-    
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+    @Autowired
+    public void registerGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(authenticationService)
-            .passwordEncoder(passwordEncoder());
+                .userDetailsService(authenticationService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -44,38 +44,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         web.ignoring().antMatchers("/resources/**");
         web.ignoring().antMatchers("/views/**");
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/login","/user/create").permitAll()
+                .authorizeRequests()
+                .antMatchers("/login", "/user/register").permitAll()
                 .anyRequest().authenticated()
-            .and().formLogin()
+                .and().formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error=1")
-            .and().logout()
+                .and().logout()
                 .logoutUrl("/logout").permitAll()
                 .logoutSuccessUrl("/login?logout=1")
-            .and().exceptionHandling()
+                .and().exceptionHandling()
                 .accessDeniedPage("/403");
-        
+
         http.csrf().disable();
+        http.x509();
+
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        
+
         return passwordEncoder;
     }
 
-    @Bean 
-    public Properties properties(){
+    @Bean
+    public Properties properties() {
         Properties properties = new Properties();
-        
+
         properties.put("salt", environment.getProperty("password.salt"));
-        
+
         return properties;
     }
+
 }

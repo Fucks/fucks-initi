@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"free.fucks.initi.entity","free.fucks.initi.service"})
+@ComponentScan(basePackages = {"free.fucks.initi.entity", "free.fucks.initi.service"})
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories(basePackages = {"free.fucks.initi.repository"})
 public class PersistenceConfig {
@@ -62,7 +62,7 @@ public class PersistenceConfig {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        
+
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         properties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
@@ -79,4 +79,8 @@ public class PersistenceConfig {
         return transactionManager;
     }
 
+    @Bean
+    public Bootstrap bootstrap() {
+        return new Bootstrap();
+    }
 }

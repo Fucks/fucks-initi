@@ -1,6 +1,6 @@
 'use strict';
 
-var LoginModule = angular.module("login", ['ngAnimate', 'ngCookies', 'ngTouch',
+var LoginModule = angular.module("login", ['System','ngAnimate', 'ngCookies', 'ngTouch',
     'ngSanitize', 'ui.router'])
 
         .config(function ($stateProvider, $urlRouterProvider) {

@@ -7,6 +7,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,6 +61,21 @@ public class ExceptionHandlingController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody
     String handleInvalidConstraintErrors(HttpServletRequest req, DataIntegrityViolationException exception) {
+
+        return "{\"exception\":\"" + exception.getMessage() + "\"}";
+    }
+
+    /**
+     * Handling exceptions de Constrainsts
+     *
+     * @param req
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody
+    String handleInvalidConstraintErrors(HttpServletRequest req, AccessDeniedException exception) {
 
         return "{\"exception\":\"" + exception.getMessage() + "\"}";
     }

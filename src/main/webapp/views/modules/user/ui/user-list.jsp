@@ -4,6 +4,7 @@
     Author     : wellington.fucks
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <div>
     <div class="row" style="margin-top: 10px ">
@@ -28,9 +29,11 @@
             </div>
         </div>
     </div>
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating waves-effect orange darken-3 waves-light btn-large" ng-click="changeToNew()">
-            <i class="material-icons">add</i>
-        </a>
-    </div>
+    <security:authorize access='hasPermission("usuarios.insert")' >
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating waves-effect orange darken-3 waves-light btn-large" ng-click="changeToNew()">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+    </security:authorize>
 </div>

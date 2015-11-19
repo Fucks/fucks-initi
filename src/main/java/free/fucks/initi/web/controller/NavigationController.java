@@ -33,7 +33,6 @@ public class NavigationController {
     public ModelAndView login() {
         return new ModelAndView("modules/login/ui/index");
     }
-    
 
     @RequestMapping("/403")
     public ModelAndView accessDenied() {

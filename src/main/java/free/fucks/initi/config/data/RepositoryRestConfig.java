@@ -19,6 +19,6 @@ public class RepositoryRestConfig extends RepositoryRestMvcConfiguration {
         config.setPageParamName("page")
                 .setDefaultPageSize(8)
                 .setLimitParamName("limit")
-                .setSortParamName("query");
+                .setSortParamName("sort");
     }
 }

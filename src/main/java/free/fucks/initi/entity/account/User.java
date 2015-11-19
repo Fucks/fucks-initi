@@ -2,19 +2,21 @@ package free.fucks.initi.entity.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import free.fucks.initi.entity.AbstractEntity;
+import free.fucks.initi.entity.account.roles.Permissao;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -47,12 +49,17 @@ public class User extends AbstractEntity implements UserDetails {
     private String email;
 
     @Setter
-                @Column(nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Setter
     @Column(nullable = false, unique = true)
     private String username;
+
+    @Getter
+    @Setter
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private Profile profile;
 
     /**
      *
@@ -93,7 +100,15 @@ public class User extends AbstractEntity implements UserDetails {
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList("USER");
+        final List<Permissao> permissoes = new ArrayList<>();
+        for (Permissao grupoPermissao : this.profile.getPermissaos()) {
+            for (Permissao permissao : grupoPermissao.getDependencias()) {
+                permissoes.addAll(permissao.getDependencias());
+            }
+            permissoes.add(grupoPermissao);
+        }
+
+        return permissoes;
     }
 
     @Override
@@ -124,5 +139,9 @@ public class User extends AbstractEntity implements UserDetails {
     @Override
     public String getPassword() {
         return this.password;
+    }
+    
+    public boolean hasPermission(Permissao permissao){
+        return this.profile.getPermissaos().contains(permissao);
     }
 }

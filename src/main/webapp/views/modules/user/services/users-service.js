@@ -47,9 +47,7 @@ UserModule.service('userService', function ($http) {
     this.deleteUsers = function (users) {
         return $http({url: 'user/delete', method: 'DELETE', data: users, headers: {'Content-Type': 'application/json'}})
                 .then(function (response) {
-                    console.log(response);
-                }, function (response) {
-                    console.log(response);
+                    return response;
                 });
     }
 });

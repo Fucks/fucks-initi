@@ -7,7 +7,7 @@
 
 <md-data-table-container>
     <table md-data-table md-row-select="selected" md-progress="deferred" class="md-primary">
-        <thead md-order="query.order" md-trigger="onChange">
+        <thead md-order="query.order" md-trigger="onPaginationChange" orderBy="entity.firstName">
             <tr>
                 <th name="Nome" order-by="firstName"></th>
                 <th name="E-mail" order-by="email"></th>

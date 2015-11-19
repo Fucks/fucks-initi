@@ -1,6 +1,6 @@
 'use strict';
 
-function HomeController($injector, $scope, $state, $stateParams) {
+function HomeController($injector, $scope, $rootScope, $state, $stateParams, $http) {
 
     /**
      * Inject methods, attributes and states inherited of the AbstractCRUDController 

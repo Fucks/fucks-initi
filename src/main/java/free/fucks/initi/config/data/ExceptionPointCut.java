@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,23 +29,28 @@ import org.springframework.stereotype.Component;
 public class ExceptionPointCut {
 
     private final Logger LOG = Logger.getLogger(Exception.class);
-    
+
     //SQLState to duplicated data field.
     public final String DUPLICATED_REGISTER_ERROR = "23505";
+
+    //error messages
+    public final String ACCESS_DENIED_EXCEPTION_MESSAGE = "access-denied.error.message";
 
     @Autowired
     @Qualifier("fieldsMessageSource")
     private MessageSource fieldsMessageSource;
 
     /**
-     * 
+     *
      * @param joinPoint
      * @return
-     * @throws Throwable 
+     * @throws Throwable
      */
     @Around("execution(* free.fucks.initi.service.*.insert*(..)) || "
             + "execution(* free.fucks.initi.service.*.update*(..)) || "
-            + "execution(* free.fucks.initi.service.*.save*(..))")
+            + "execution(* free.fucks.initi.service.*.save*(..)) || "
+            + "execution(* free.fucks.initi.service.*.remove*(..)) || "
+            + "execution(* free.fucks.initi.service.*.delete*(..))")
     public Object doHandleDataIntegrityViolationException(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             LOG.info("------> Caiu no ASPECT!");
@@ -64,6 +70,10 @@ public class ExceptionPointCut {
                     throw new DataIntegrityViolationException("O campo " + fieldsMessageSource.getMessage(fieldError, null, Locale.getDefault()) + " já existe.");
                 }
             }
+        } catch (AccessDeniedException exception) {
+            throw new AccessDeniedException(fieldsMessageSource.getMessage(ACCESS_DENIED_EXCEPTION_MESSAGE, null, Locale.getDefault()));
+        } catch(Exception exception){
+            return exception;
         }
         return null;
     }

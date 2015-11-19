@@ -1,12 +1,14 @@
 'use strict';
 
-function LoginController($injector, $scope, $state, $stateParams, accountService) {
+function LoginController($rootScope, $injector, $scope, $state, $stateParams, $http, accountService) {
 
     $injector.invoke(AbstractController, this, {$scope: $scope});
 
     //States
     $scope.LOGIN_STATE = 'login';
     $scope.REGISTER_STATE = 'register';
+
+    $scope.user = {};
 
     //Vars
     $scope.error;

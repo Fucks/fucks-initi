@@ -43,6 +43,12 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
 
                 break;
             }
+            case $scope.DETAIL_STATE:
+            {
+                $scope.findUser(params.id);
+
+                break;
+            }
             case $scope.EDIT_STATE:
             {
                 $scope.findUser(params.id);
@@ -84,6 +90,15 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
      */
     $scope.changeToEdit = function (id) {
         $state.go($scope.EDIT_STATE, {id: id});
+    };
+
+    /**
+     * 
+     * @param {type} id
+     * @returns {undefined}
+     */
+    $scope.changeToDetail = function (id) {
+        $state.go($scope.DETAIL_STATE);
     };
 
     /**
@@ -185,15 +200,16 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
      * @returns {undefined}
      */
     $scope.delete = function ($event) {
-        userService.deleteUsers($scope.selected).then(function success(response) {
+        userService.deleteUsers($scope.selected)
+                .then(function (response) {
+                    Materialize.toast($scope.selected.length > 1 ? "Usuários excluidos" : "Usuário excluido", 5000);
+                    $scope.selected = [];
+                    $scope.loadUsers();
 
-            Materialize.toast($scope.selected.length > 1 ? "Usuários excluidos" : "Usuário excluido", 5000);
-            $scope.selected = [];
-            $scope.loadUsers();
-
-        }, function error(response) {
-            Materialize.toast("Erro ao excluir usuários", 5000);
-        })
+                }, function (response) {
+                    console.log(response);
+                    Materialize.toast("Erro ao excluir usuários, " + response.data.exception, 5000);
+                })
     }
 }
 ;

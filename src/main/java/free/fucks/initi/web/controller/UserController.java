@@ -1,5 +1,6 @@
 package free.fucks.initi.web.controller;
 
+import free.fucks.initi.config.security.securityschema.SystemPermissions;
 import free.fucks.initi.entity.account.User;
 import free.fucks.initi.service.AccountService;
 import java.util.List;
@@ -7,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,17 +36,29 @@ public class UserController {
     /**
      *
      * @param user
+     * @throws Exception
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) throws Exception {
         this.accountService.save(user);
     }
-    
+
     /**
-     * 
+     *
      * @param user
-     * @throws Exception 
+     * @throws Exception
      */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public void registerUser(@RequestBody User user) throws Exception {
+        this.accountService.registerNewUser(user);
+    }
+
+    /**
+     *
+     * @param user
+     * @throws Exception
+     */
+    @PreAuthorize("hasRole('" + SystemPermissions.USUARIOS_UPDATE + "')")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void updateUser(@RequestBody User user) throws Exception {
         this.accountService.save(user);
@@ -71,9 +87,9 @@ public class UserController {
     }
 
     /**
-     * 
+     *
      * @param id
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public @ResponseBody
@@ -83,12 +99,11 @@ public class UserController {
 
     /**
      *
+     * @param id
      * @return
      */
-    @RequestMapping(value = "/list_error", method = RequestMethod.GET)
-    public @ResponseBody
-    List<User> listAllUsersWithError() throws Exception {
-
-        throw new Exception("Aqui da erro seu cuzão");
+    @RequestMapping(value = "/authenticated", method = RequestMethod.GET)
+    public @ResponseBody User getAuthenticatedUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
