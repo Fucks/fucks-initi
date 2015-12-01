@@ -6,9 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <c:url value="/logout" var="logoutUrl" />
 <div class="nav-wrapper" ng-cloak>
+    <security:authentication var="principal" property="principal" />
     <md-toolbar>
         <header>
             <div class="md-toolbar-tools">
@@ -27,7 +29,7 @@
                                style="height: 64px;top:-5px;">
                         <img class="toolbar-user-avatar ng-scope" src="resources/images/default_user.png">
                         <span class="ng-scope">
-                            ${pageContext.request.userPrincipal.principal.firstName}
+                            ${principal.firstName}
                         </span><div class="md-ripple-container"></div></md-button>
                     <md-menu-content width="4" class="md-white-cyan-theme">
                         <md-menu-item role="menuitem">

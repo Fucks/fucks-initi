@@ -29,11 +29,9 @@
             </div>
         </div>
     </div>
-    <security:authorize access='hasPermission("usuarios.insert")' >
-        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-            <a class="btn-floating waves-effect orange darken-3 waves-light btn-large" ng-click="changeToNew()">
-                <i class="material-icons">add</i>
-            </a>
-        </div>
-    </security:authorize>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating waves-effect orange darken-3 waves-light btn-large" ng-click="changeToNew()">
+            <i class="material-icons">add</i>
+        </a>
+    </div>
 </div>

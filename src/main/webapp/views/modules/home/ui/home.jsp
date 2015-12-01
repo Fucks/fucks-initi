@@ -20,32 +20,20 @@
         </div>
         <div class="col s12 m6 l3 valign">
             <div class="card-panel waves-effect home-menu center-align">
-                <i class="material-icons medium">cloud_download</i>
-                <h4 class="hide-on-small-only">Download</h4>
+                <i class="material-icons medium">person</i>
+                <h4 class="hide-on-small-only">Profile</h4>
             </div>
         </div>
         <div class="col s12 m6 l3 valign">
             <div class="card-panel waves-effect home-menu center-align">
-                <i class="material-icons medium">file_download</i>
-                <h4 class="hide-on-small-only">Cloud </h4>
+                <i class="material-icons medium">settings</i>
+                <h4 class="hide-on-small-only">Opções</h4>
             </div>
         </div>
         <div class="col s12 m6 l3 valign">
             <div class="card-panel waves-effect home-menu center-align">
-                <i class="material-icons medium">font_download</i>
-                <h4 class="hide-on-small-only">Upload</h4>
-            </div>
-        </div>
-        <div class="col s12 m6 l3 valign">
-            <div class="card-panel waves-effect home-menu center-align">
-                <i class="material-icons medium">account_balance</i>
-                <h4 class="hide-on-small-only">Cloud </h4>
-            </div>
-        </div>
-        <div class="col s12 m6 l3 valign">
-            <div class="card-panel waves-effect home-menu center-align">
-                <i class="material-icons medium">add</i>
-                <h4 class="hide-on-small-only">Download</h4>
+                <i class="material-icons medium">exit_to_app</i>
+                <h4 class="hide-on-small-only">Sair</h4>
             </div>
         </div>
     </div>

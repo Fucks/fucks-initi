@@ -1,7 +1,9 @@
 package free.fucks.initi.web.controller;
 
 import free.fucks.initi.config.security.securityschema.SystemPermissions;
+import free.fucks.initi.entity.account.Profile;
 import free.fucks.initi.entity.account.User;
+import free.fucks.initi.entity.account.roles.GrupoPermissao;
 import free.fucks.initi.service.AccountService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,4 +108,28 @@ public class UserController {
     public @ResponseBody User getAuthenticatedUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+    
+    /*
+    * PROFILES
+    */
+    
+    /**
+     * 
+     * @return 
+     */
+    @RequestMapping(value="/profiles", method = RequestMethod.GET)
+    public @ResponseBody List<Profile> getProfiles(){
+        return this.accountService.listaAllProfiles();
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    @RequestMapping(value = "/all-permissions-grouped", method = RequestMethod.GET)
+    public @ResponseBody List<GrupoPermissao> getAllPermissions(){
+        return SystemPermissions.GRUPO_PERMISSOES;
+    }
+    
+    
 }

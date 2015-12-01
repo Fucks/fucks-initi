@@ -209,6 +209,14 @@ public class AccountService {
     public Profile findProfileByName(String name) {
         return this.profileRepository.findByName(name);
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public List<Profile> listaAllProfiles(){
+        return this.profileRepository.findAll();
+    }
 
     /**
      *

@@ -43,11 +43,18 @@
                     <input id="confirm-password" ng-model="confirmPassword" required type="password"  ng-disabled="{{currentState == DETAIL_STATE}}">
                     <label for="confirm-password">Confirmar senha</label>
                 </div>
-                <div class="section right">
-                    <div class="col s12">
-                        <a class="waves-effect waves-light btn light-blue" ng-show="currentState == EDIT_STATE" ng-click="update()"><i class="material-icons left">save</i>Atualizar</a>
-                        <a class="waves-effect waves-light btn light-blue" ng-show="currentState == INSERT_STATE" ng-click="insert()"><i class="material-icons left">save</i>salvar</a>
-                        <a class="btn-orange btn-flat waves-effect waves-orange" ng-click="changeToList()"><i class="material-icons left">cancel</i>cancelar</a>
+                <div class="input-field col s12 m6">
+                    <md-select placeholder="Selecione o Perfil de acesso" ng-model="currentEntity.profile">
+                        <md-option ng-value="profile" ng-selected="currentEntity.profile.name" ng-repeat="profile in profiles">{{profile.name}}</md-option>
+                    </md-select>
+                </div>
+                <div class="input-field col s12">
+                    <div class="section right">
+                        <div class="col s12">
+                            <a class="waves-effect waves-light btn light-blue" ng-show="currentState == EDIT_STATE" ng-click="update()"><i class="material-icons left">save</i>Atualizar</a>
+                            <a class="waves-effect waves-light btn light-blue" ng-show="currentState == INSERT_STATE" ng-click="insert()"><i class="material-icons left">save</i>salvar</a>
+                            <a class="btn-orange btn-flat waves-effect waves-orange" ng-click="changeToList()"><i class="material-icons left">cancel</i>cancelar</a>
+                        </div>
                     </div>
                 </div>
             </form>

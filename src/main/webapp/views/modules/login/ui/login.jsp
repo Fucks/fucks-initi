@@ -21,8 +21,8 @@
             </div>
         </div>
         <div class="form-group">
-            <input id="stay-signed" type="checkbox" >
-            <label for="stay-signed">Permanecer logado.</label>
+            <input id="remember-me" name="remember-me" type="checkbox" >
+            <label for="remember-me">Permanecer logado.</label>
             <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
                 <i class="material-icons right">send</i>
             </button>

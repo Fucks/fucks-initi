@@ -47,7 +47,19 @@ UserModule.service('userService', function ($http) {
     this.deleteUsers = function (users) {
         return $http({url: 'user/delete', method: 'DELETE', data: users, headers: {'Content-Type': 'application/json'}})
                 .then(function (response) {
-                    return response;
+                    return "{\"code\":" + response.status + ",\"msg\":\""+(users.length > 1 ? 'Usuários excluidos' : 'Usuário excluído')+" com sucesso!\"}";
+                },
+                function (errResponse) {
+                    return "{\"code\":500,\"msg\":\"Erro ao excluir usuário, " + errResponse.data.exception + "\"}";
+                });
+    }
+    this.loadProfiles = function () {
+        return $http.get('user/profiles')
+                .then(function (response) {
+                    return response.data;
+                },
+                function (errResponse) {
+                    return errResponse.data.exception;
                 });
     }
 });

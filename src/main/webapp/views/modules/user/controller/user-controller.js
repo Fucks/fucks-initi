@@ -17,6 +17,8 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
     $scope.users = [{}];
     $scope.currentPage;
     $scope.selected;
+    $scope.profiles = {};
+    $scope.profile = {};
 
     /**
      * 
@@ -39,6 +41,7 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
             }
             case $scope.INSERT_STATE:
             {
+                $scope.loadProfiles();
                 $scope.currentEntity = {};
 
                 break;
@@ -117,6 +120,17 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
 
     /**
      * 
+     * @returns {undefined}
+     */
+    $scope.loadProfiles = function () {
+        userService.loadProfiles()
+                .then(function (response) {
+                    $scope.profiles = response;
+                });
+    };
+
+    /**
+     * 
      * @param {type} id
      * @returns {undefined}
      */
@@ -124,6 +138,13 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
         userService.findUser(id)
                 .then(function (response) {
                     $scope.currentEntity = response;
+
+                    userService.loadProfiles()
+                            .then(function (response) {
+                                $scope.profiles = response;
+                                $scope.profile = $scope.currentEntity.profile;
+                            });
+
                 });
     };
 
@@ -202,14 +223,11 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
     $scope.delete = function ($event) {
         userService.deleteUsers($scope.selected)
                 .then(function (response) {
-                    Materialize.toast($scope.selected.length > 1 ? "Usuários excluidos" : "Usuário excluido", 5000);
+                    response = JSON.parse(response);
+                    Materialize.toast(response.msg, 5000);
                     $scope.selected = [];
                     $scope.loadUsers();
-
-                }, function (response) {
-                    console.log(response);
-                    Materialize.toast("Erro ao excluir usuários, " + response.data.exception, 5000);
-                })
+                });
     }
 }
 ;

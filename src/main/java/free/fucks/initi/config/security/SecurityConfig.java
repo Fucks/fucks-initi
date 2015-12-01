@@ -1,6 +1,9 @@
 package free.fucks.initi.config.security;
 
-import java.util.Properties;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +16,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  *
@@ -31,6 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     public void registerGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,7 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout").permitAll()
                 .logoutSuccessUrl("/login?logout=1")
                 .and().exceptionHandling()
-                .accessDeniedPage("/403");
+                .accessDeniedPage("/403")
+                .and()
+                .rememberMe().tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(1209600);
 
         http.csrf().disable();
         http.x509();
@@ -73,12 +85,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public Properties properties() {
-        Properties properties = new Properties();
+    public PersistentTokenRepository persistentTokenRepository() {
 
-        properties.put("salt", environment.getProperty("password.salt"));
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
 
-        return properties;
+        //necessário criar a tabela de token;
+        try {
+            dataSource.getConnection().prepareStatement(db.CREATE_TABLE_SQL).executeQuery();
+        } catch (SQLException ex) {
+            //se der erro é pq a tabela ja existe.
+        }
+
+        db.setDataSource(dataSource);
+        return db;
+    }
+
+    @Bean
+    public SavedRequestAwareAuthenticationSuccessHandler
+            savedRequestAwareAuthenticationSuccessHandler() {
+
+        SavedRequestAwareAuthenticationSuccessHandler auth
+                = new SavedRequestAwareAuthenticationSuccessHandler();
+        auth.setTargetUrlParameter("targetUrl");
+        return auth;
     }
 
 }
