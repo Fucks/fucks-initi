@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="../../styles.jsp" />
         <title>Entre!</title>
-        <link rel="stylesheet" href="<c:url value="/resources/css/custom/login.css" />">
+        <link rel="stylesheet" href="<c:url value="/resource/css/custom/login.css" />">
     </head>
     <body>
         <header>

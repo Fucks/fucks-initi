@@ -59,6 +59,14 @@ public class AccountService {
         return this.accountRepository.save(user);
     }
 
+    public User saveDefault(User user) {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        String password = this.passwordEncoder.encode(user.getPassword());
+        user.setPassword(password);
+
+        return this.accountRepository.save(user);
+    }
+
     /**
      *
      * @param user

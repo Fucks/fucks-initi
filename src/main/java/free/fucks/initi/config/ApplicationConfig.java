@@ -29,14 +29,14 @@ public class ApplicationConfig {
 
     private static final String MESSAGE_SOURCE_BASE_NAME = "i18n/messages";
 
-    @Bean
-    MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename(MESSAGE_SOURCE_BASE_NAME);
-        messageSource.setUseCodeAsDefaultMessage(true);
-
-        return messageSource;
-    }
+//    @Bean
+//    MessageSource messageSource() {
+//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//        messageSource.setBasename(MESSAGE_SOURCE_BASE_NAME);
+//        messageSource.setUseCodeAsDefaultMessage(true);
+//
+//        return messageSource;
+//    }
 
     @Bean
     MessageSource fieldsMessageSource() {

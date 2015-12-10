@@ -28,6 +28,16 @@ public class NavigationController {
     public ModelAndView createUser() {
         return new ModelAndView("modules/user/ui/index");
     }
+    
+    @RequestMapping("/projeto")
+    public ModelAndView project() {
+        return new ModelAndView("modules/project/project/ui/index");
+    }
+    
+    @RequestMapping("/cronograma")
+    public ModelAndView cronograma() {
+        return new ModelAndView("modules/cronograma/ui/index");
+    }
 
     @RequestMapping("/login")
     public ModelAndView login() {

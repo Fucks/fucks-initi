@@ -27,7 +27,7 @@
                                ng-transclude
                                aria-expanded="false"
                                style="height: 64px;top:-5px;">
-                        <img class="toolbar-user-avatar ng-scope" src="resources/images/default_user.png">
+                        <img class="toolbar-user-avatar ng-scope" src="resource/images/default_user.png">
                         <span class="ng-scope">
                             ${principal.firstName}
                         </span><div class="md-ripple-container"></div></md-button>
@@ -69,7 +69,7 @@
         background-color: #FFF;
         opacity: .7;
         position: absolute;
-        z-index: 1002;
+        z-index: 3002;
         color: #FFF;
     }
     .sk-fading-circle {

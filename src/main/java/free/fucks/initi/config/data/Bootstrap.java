@@ -5,9 +5,6 @@ import free.fucks.initi.entity.account.Profile;
 import free.fucks.initi.entity.account.User;
 import free.fucks.initi.entity.account.roles.GrupoPermissao;
 import free.fucks.initi.entity.account.roles.Permissao;
-import free.fucks.initi.repository.IAccountRepository;
-import free.fucks.initi.repository.IPermissaoRepository;
-import free.fucks.initi.repository.IProfileRepository;
 import free.fucks.initi.service.AccountService;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +138,7 @@ public class Bootstrap implements InitializingBean {
         user.setPassword("admin");
         user.setUsername("admin");
 
-        this.accountService.save(user);
+        this.accountService.saveDefault(user);
 
         LOG.info("<-- usuários criados");
 

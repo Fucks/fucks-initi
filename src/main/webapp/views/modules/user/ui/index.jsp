@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>{{title}}</title>
         <jsp:include page="../../styles.jsp" />
-        <link rel="stylesheet" href="<c:url value="/resources/css/custom/custom.css" />">
+        <link rel="stylesheet" href="<c:url value="/resource/css/custom/custom.css" />">
         <c:url value="/logout" var="logoutUrl" />
     </head>
     <body>
