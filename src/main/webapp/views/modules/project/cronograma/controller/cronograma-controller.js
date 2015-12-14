@@ -71,7 +71,7 @@ function CronogramaController($injector, $scope, cronogramaService) {
             $(this).trigger("resize");
         });
     };
-    
+
     $scope.loadGanttFromServer = function (id) {
         cronogramaService.findProject(id)
                 .then(function (response) {
@@ -94,8 +94,8 @@ function CronogramaController($injector, $scope, cronogramaService) {
         $scope.currentProject.tasks = $scope.ge.saveGantt().tasks;
 
         //necessário limpar os IDs
-        $scope.currentProject.tasks.forEach(function (task){
-            if((task.id + "").indexOf("tmp_") == 0){
+        $scope.currentProject.tasks.forEach(function (task) {
+            if ((task.id + "").indexOf("tmp_") == 0) {
                 task.id = null;
             }
             task.projectIndex = $scope.currentProject.tasks.indexOf(task);

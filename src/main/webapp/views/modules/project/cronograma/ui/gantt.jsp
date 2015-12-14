@@ -9,7 +9,7 @@
 <!DOCTYPE HTML>
 <!-- adiciona os imports necessários -->
 <div class="page-content">
-    <div class="col s12 m12 l12 valign">
+    <div class="col s12 m12 l12">
         <div class="col s12">
             <div class="row" style="margin-top: 10px ">
                 <div class="col s12 m6 l6">
@@ -183,8 +183,6 @@
     </div>
 </div>
 
-</div>
-
 <div id="gantEditorTemplates" style="display:none;">
 
 
@@ -217,7 +215,7 @@
         <tr taskId="(#=obj.inprojectId#)" class="taskEditRow" level="(#=level#)">
             <td class="edit" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow()+1#)</span></td>
             <td class="noClip" align="center"><div class="taskStatus cvcColorSquare" status="(#=obj.status#)"></div></td>
-            <td><input type="text" dir="rtl" name="code" disabled='true' value="(#=obj.code#)"></td>
+            <td style="padding: 10px;"><input type="text" dir="rtl" name="code" disabled='true' value="(#=obj.code#)"></td>
             <td class="indentCell" style="padding-left:(#=obj.level*10#)px;">
                 <div class="(#=obj.isParent()?'exp-controller expcoll exp':'exp-controller'#)" align="center"></div>
                 <input type="text" class="(#=obj.isParent()?'eap':''#)" name="name" value="(#=obj.name#)">

@@ -16,7 +16,7 @@
         <c:url value="/logout" var="logoutUrl" />
     </head>
     <body>
-        <div class="row">
+        <div class="row" style="margin-bottom: 0">
             <div class="header">
                 <!-- HEADER -->
                 <jsp:include page="../../../header.jsp" />
