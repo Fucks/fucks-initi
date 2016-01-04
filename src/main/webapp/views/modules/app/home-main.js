@@ -1,37 +1,48 @@
 'use strict';
 
-angular.module("Project", ['ngAnimate', 'ngCookies', 'ngTouch',
+angular.module("System", ['ngAnimate', 'ngCookies', 'ngTouch',
     'ngSanitize', 'ngMaterial', 'directive.loading', 'md.data.table', 'ui.router'])
 
-        .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+        .config(function ($stateProvider, $urlRouterProvider) {
 
             // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
             $urlRouterProvider.otherwise('/');
 
             // Use $stateProvider to configure your states.
-            $stateProvider
-                    .state('projects', {
-                        url: "/",
-                        templateUrl: "views/modules/project/ui/project/project-list.jsp",
-                        title: 'Gerenciar Projetos',
-                        navigation: '/home',
-                        controller: 'ProjectController',
-                        controllerAs: 'controller'
-                    }).state('project-insert', {
-                url: "/novo",
-                templateUrl: 'views/modules/project/ui/project/project-form.jsp',
-                title: 'Novo Projeto',
-                navigation: 'projects',
-                controller: 'ProjectController',
-                controllerAs: 'controller'
-            }).state('cronograma', {
-                url: "/:id/cronograma",
-                templateUrl: "views/modules/project/ui/cronograma/gantt.jsp",
-                title: 'Cronograma',
-                navigation: 'projects',
-                controller: 'CronogramaController',
+            $stateProvider.state('home', {
+                url: "/",
+                templateUrl: "views/modules/app/ui/home/home.jsp",
+                title: 'Bem vindo',
+                controller: 'HomeController',
                 controllerAs: 'controller'
             });
+
+            //usuarios
+            $stateProvider
+                    .state('users', {
+                        url: "/user-module",
+                        templateUrl: "views/modules/app/ui/user/user-list.jsp",
+                        title: 'Gerenciar usuários',
+                        navigation: '/home',
+                        controller: 'UserController',
+                        controllerAs: 'controller'
+                    }).state('users-insert', {
+                url: "/novo",
+                templateUrl: 'views/modules/app/ui/user/user-form.jsp',
+                title: 'Novo Usuário',
+                navigation: 'users',
+                controller: 'UserController',
+                controllerAs: 'controller'
+            })
+                    .state('users-edit', {
+                        url: "/editar/:id",
+                        templateUrl: 'views/modules/app/ui/user/user-form.jsp',
+                        title: 'Editar usuário',
+                        navigation: 'users',
+                        controller: 'UserController',
+                        controllerAs: 'controller'
+                    });
+
         })
         .run(function ($rootScope, $state, $stateParams) {
 
@@ -42,18 +53,11 @@ angular.module("Project", ['ngAnimate', 'ngCookies', 'ngTouch',
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
 
-
             //inicia os componentes dos estilos.
-            $(document).ready(function () {
-                $(".button-collapse").sideNav();
-                $(".dropdown-button").dropdown();
-                $('[data-toggle="datepicker"]').datepicker();
-                $.fn.datepicker.setDefaults({format:'dd/mm/yyyy', language: 'pt-BR'})
-            });
-        }
-        );
+            $(".button-collapse").sideNav();
+        });
 
-angular.module("Project")
+angular.module("System")
         .controller("HeaderController", function ($rootScope, userService) {
 
             var vm = this;
@@ -78,5 +82,5 @@ angular.module("Project")
 
         });
 angular.element(document).ready(function () {
-    angular.bootstrap(document, ['Project']);
+    angular.bootstrap(document, ['System']);
 });

@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function AbstractController($rootScope, $scope, $state, $stateParams, $location) {
-
+function AbstractController($rootScope, $scope, $state, $stateParams, $location, $mdToast) {
 
     $rootScope.goToBack = function (state) {
         //getting server URL
@@ -27,9 +26,18 @@ function AbstractController($rootScope, $scope, $state, $stateParams, $location)
 
         $scope.init(toState, toParams);
     });
-    
+
+    $scope.showToast = function (msg, delay) {
+        $mdToast.show(
+                $mdToast.simple()
+                .content(msg)
+                .position('top right')
+                .hideDelay(delay)
+                );
+    }
+
     //ativa js's
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.tooltipped').tooltip({delay: 50});
     });
 }

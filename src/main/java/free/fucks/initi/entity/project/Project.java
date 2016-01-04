@@ -77,7 +77,12 @@ public class Project extends AbstractEntity {
     @Getter
     @Setter
     private Boolean canWriteOnParent;
-    
+
+    @Getter
+    @Setter
+    @Transient
+    private List<Long> deletedTasksId;
+
     @Getter
     @Setter
     @ManyToOne(fetch = FetchType.EAGER)

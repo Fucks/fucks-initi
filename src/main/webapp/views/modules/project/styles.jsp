@@ -15,4 +15,5 @@
 <link rel=stylesheet href="<c:url value="/resource/library/gantt/gantt.css" />" type="text/css">
 <link rel=stylesheet href="<c:url value="/resource/library/gantt/ganttPrint.css" />" type="text/css" media="print">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resource/library/gantt/libs/jquery.svg.css" />">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resource/library/gantt/libs/material-datepicker/css/material.datepicker.css" />">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resource/library/datepicker/datepicker.min.css" />">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resource/library/multiselect/jquery.multiselect.css" />">

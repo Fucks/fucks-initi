@@ -21,17 +21,12 @@ public class NavigationController {
 
     @RequestMapping("/home")
     public ModelAndView home() {
-        return new ModelAndView("modules/home/ui/index");
+        return new ModelAndView("modules/app/ui/index");
     }
 
-    @RequestMapping("/user-module")
-    public ModelAndView createUser() {
-        return new ModelAndView("modules/user/ui/index");
-    }
-    
     @RequestMapping("/projeto")
     public ModelAndView project() {
-        return new ModelAndView("modules/project/project/ui/index");
+        return new ModelAndView("modules/project/ui/index");
     }
     
     @RequestMapping("/cronograma")

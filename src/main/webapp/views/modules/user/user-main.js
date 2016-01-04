@@ -1,7 +1,6 @@
 'use strict';
 
-var UserModule = angular.module("User", ['System', 'ngAnimate', 'ngCookies', 'ngTouch',
-    'ngSanitize', 'ui.router', 'directive.loading', 'ngMaterial', 'md.data.table'])
+var UserModule = angular.module("User", ['System', 'md.data.table'])
 
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 

@@ -91,7 +91,7 @@ td{
 }
 
 .splitBox1{
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: hidden;
     padding-bottom: 15px;
 }

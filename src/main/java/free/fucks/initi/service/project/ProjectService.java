@@ -108,6 +108,7 @@ public class ProjectService {
         //adiciona o usuário como recurso
         final Resource resource = new Resource();
         resource.setUser(userLogged);
+        
 
         return project;
     }
@@ -137,6 +138,9 @@ public class ProjectService {
             }
 
             task = this.taskRepository.save(task);
+        }
+        for(Long id : project.getDeletedTasksId()){
+            this.taskRepository.delete(id);
         }
 
         this.taskRepository.save(projectTasks);

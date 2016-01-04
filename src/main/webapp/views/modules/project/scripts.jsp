@@ -23,7 +23,6 @@
 <script src="<c:url value="/resource/library/md-data-table/md-data-table.min.js" />" ></script>
 
 <script src="<c:url value="/views/modules/abstract-controller.js" />" ></script>
-<script src="<c:url value="/views/systemApp.js" />" ></script>
 
 <!-- Gantt library -->
 <script src="<c:url value="/resource/library/gantt/libs/jquery.livequery.min.js" />"></script>
@@ -44,6 +43,6 @@
 <script src="<c:url value="/resource/library/gantt/ganttGridEditor.js" />"></script>
 <script src="<c:url value="/resource/library/gantt/ganttMaster.js" />"></script>  
 <script src="<c:url value="/resource/library/gantt/libs/moment.min.js" />"></script>
-<script src="<c:url value="/resource/library/gantt/libs/jquery-2.1.3.min.js" />"></script>
 <script src="<c:url value="/resource/library/gantt/libs/knockout-3.2.0.js" />"></script>
-<script src="<c:url value="/resource/library/gantt/libs/material-datepicker/js/material.datepicker.js" />"></script>
+<script src="<c:url value="/resource/library/datepicker/datepicker.js" />"></script>
+<script src="<c:url value="/resource/library/multiselect/jquery.multiselect.js" />"></script>

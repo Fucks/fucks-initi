@@ -1049,6 +1049,12 @@ function Assignment(id, resourceId, roleId, effort) {
     this.effort = effort;
 }
 
+function ResourceTask(id, assigment, unitId, percent){
+    this.id = id;
+    this.assignment = assigment;
+    this.unitId = unitId;
+    this.percent = percent;
+}
 
 //<%------------------------------------------------------------------------  RESOURCE ---------------------------------------------------------------%>
 function Resource(id, name) {

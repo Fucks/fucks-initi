@@ -29,7 +29,7 @@ function GridEditor(master) {
 
 GridEditor.prototype.fillEmptyLines = function () {
     var factory = new TaskFactory();
-    
+
     var context = this;
 
     //console.debug("GridEditor.fillEmptyLines");
@@ -62,7 +62,7 @@ GridEditor.prototype.fillEmptyLines = function () {
                 lastTask = ch;
             });
             master.endTransaction();
-            if(lastTask.getParent() != null){
+            if (lastTask.getParent() != null) {
                 lastTask.getParent().rowElement.find("input").addClass("eap");
             }
             lastTask.rowElement.click();
@@ -74,7 +74,7 @@ GridEditor.prototype.fillEmptyLines = function () {
                             imp.val(lastTask.name);
                         }
                     });
-            
+
             //cria uma nova linha em branco
             context.fillEmptyLines();
         });
@@ -172,7 +172,6 @@ GridEditor.prototype.refreshTaskRow = function (task) {
     row.find("[name=start]").val(new Date(task.start).format()).updateOldValue(); // called on dates only because for other field is called on focus event
     row.find("[name=end]").val(new Date(task.end).format()).updateOldValue();
     row.find("[name=depends]").val(task.depends);
-    row.find(".taskAssigs").html("<div id='assings'>" + task.getAssigsString() + "</div>");
 
     //profiler.stop();
 };
@@ -201,7 +200,7 @@ GridEditor.prototype.bindRowEvents = function (task, taskRow) {
     self.bindRowExpandEvents(task, taskRow);
 
     taskRow.find(".edit").click(function () {
-        self.openFullEditor(task, taskRow)
+//        self.openFullEditor(task, taskRow)
     });
 
 };
@@ -676,4 +675,73 @@ GridEditor.prototype.openFullEditor = function (task, taskRow) {
 
     var ndo = createBlackPage(800, 500).append(taskEditor);
 
+};
+GridEditor.prototype.saveEditTask = function (unsavedTask) {
+    var self = this;
+
+    var task = self.master.getTask(unsavedTask.inprojectId); // get task again because in case of rollback old task is lost
+
+    self.master.beginTransaction();
+    task.name = unsavedTask.name;
+    task.description = unsavedTask.description;
+    task.code = unsavedTask.code;
+    task.progress = unsavedTask.progress;
+    task.duration = unsavedTask.duration;
+    task.startIsMilestone = unsavedTask.startIsMilestone;
+    task.endIsMilestone = unsavedTask.endIsMilestone;
+
+    //set assignments necessário refazer 
+//    taskEditor.find("tr[assigId]").each(function () {
+//        var trAss = $(this);
+//        var assId = trAss.attr("assigId");
+//        var resId = trAss.find("[name=resourceId]").val();
+//        var roleId = trAss.find("[name=roleId]").val();
+//        var effort = millisFromString(trAss.find("[name=effort]").val());
+//
+//
+//        //check if an existing assig has been deleted and re-created with the same values
+//        var found = false;
+//        for (var i = 0; i < task.assigs.length; i++) {
+//            var ass = task.assigs[i];
+//
+//            if (assId == ass.id) {
+//                ass.effort = effort;
+//                ass.roleId = roleId;
+//                ass.resourceId = resId;
+//                ass.touched = true;
+//                found = true;
+//                break;
+//
+//            } else if (roleId == ass.roleId && resId == ass.resourceId) {
+//                ass.effort = effort;
+//                ass.touched = true;
+//                found = true;
+//                break;
+//
+//            }
+//        }
+//
+//        if (!found) { //insert
+//            var ass = task.createAssignment("tmp_" + new Date().getTime(), resId, roleId, effort);
+//            ass.touched = true;
+//        }
+//
+//    });
+
+    //remove untouched assigs - necessário refazer
+//    task.assigs = task.assigs.filter(function (ass) {
+//        var ret = ass.touched;
+//        delete ass.touched;
+//        return ret;
+//    });
+
+    //change dates
+    task.setPeriod(unsavedTask.startDate.getTime(), unsavedTask.endDate.getTime());
+
+    //change status
+    task.changeStatus(unsavedTask.status);
+
+    if (self.master.endTransaction()) {
+        console.log("Atividade salva! "+task.name);
+    }
 };
