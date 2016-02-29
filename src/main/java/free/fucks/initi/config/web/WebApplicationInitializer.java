@@ -1,6 +1,7 @@
 package free.fucks.initi.config.web;
 
 import free.fucks.initi.config.ApplicationConfig;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 import org.springframework.web.context.ContextLoaderListener;
@@ -40,5 +41,6 @@ public class WebApplicationInitializer implements org.springframework.web.WebApp
         ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+        dispatcher.setMultipartConfig(new MultipartConfigElement("/tmp", 1024*1024*5, 1024*1024*5*5, 1024*1024));
     }
 }

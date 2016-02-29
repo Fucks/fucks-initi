@@ -18,12 +18,12 @@ angular.module("Project").service('projectService', function ($http) {
                         });
     };
     this.importProject = function (file) {
-        return $http({
-                url: 'project/upload',
-                method: 'POST',
-                headers: {'Content-Type':'multipart/*'},
-                data: new FormData(file)
-            })
+        var formData = new FormData();
+        formData.append("file", file);
+        return $http.post('project/upload', formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
                 .then(function (response) {
                     return "{\"code\":" + response.status + ",\"msg\":\"Projeto importado!\",\"data\":" + JSON.stringify(response.data) + "}";
                 },

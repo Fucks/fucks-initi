@@ -2,6 +2,9 @@ package free.fucks.initi.web.controller;
 
 import free.fucks.initi.entity.project.Project;
 import free.fucks.initi.service.project.ProjectService;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -75,27 +78,26 @@ public class ProjectController {
     }
 
     /**
-     * 
+     *
      * @param name
      * @param file
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/upload", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public @ResponseBody String handleFileUpload(MultipartHttpServletRequest file) {
-        if (!file.getFiles("files").isEmpty()) {
+    public @ResponseBody
+    String handleFileUpload(@RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
             try {
-//                byte[] bytes = file.getBytes();
-//                BufferedOutputStream stream
-//                        = new BufferedOutputStream(new FileOutputStream(new File("aa")));
-//                stream.write(bytes);
-//                stream.close();
-                return "You successfully uploaded " + "aa" + "!";
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream  = new BufferedOutputStream(new FileOutputStream(new File("teste")));
+                stream.write(bytes);
+                stream.close();
+                return "You successfully uploaded !";
             } catch (Exception e) {
-                return "You failed to upload " + "aa" + " => " + e.getMessage();
+                return "You failed to upload  => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + "aa" + " because the file was empty.";
+            return "You failed to upload because the file was empty.";
         }
     }
-
 }
