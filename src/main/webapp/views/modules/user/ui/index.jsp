@@ -35,5 +35,6 @@
         <script type="text/javascript" src="<c:url value="/views/modules/user/user-main.js" />" ></script>
         <script type="text/javascript"  src="<c:url value="/views/modules/user/controller/user-controller.js" />" ></script>
         <script type="text/javascript"  src="<c:url value="/views/modules/user/services/users-service.js" />" ></script>
+        <script type="text/javascript"  src="<c:url value="/views/modules/user/services/image-service.js" />" ></script>
     </body>
 </html>

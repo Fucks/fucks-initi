@@ -13,6 +13,7 @@ import free.fucks.initi.repository.project.ITaskRepository;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -132,8 +133,9 @@ public class ProjectService {
 
             //verifica se tem pai e salva
             if (task.getTaskParentId() != null && !task.getTaskParentId().isEmpty()) {
-                Task parent = this.findByInprojectIdInTasks(projectTasks, task.getTaskParentId());
-                task.setParent(parent);
+                Optional parent = this.findByInprojectIdInTasks(projectTasks, task.getTaskParentId());
+                if(parent.isPresent())
+                    task.setParent((Task)parent.get());
             }
 
             task = this.taskRepository.save(task);
@@ -152,7 +154,7 @@ public class ProjectService {
      * @param task
      */
     public void createProjectTree(final Project project, final Task task) {
-
+        
         final List<Task> childrens = this.taskRepository.findByParentIdOrderByProjectIndex(task.getId());
 
         if (!childrens.isEmpty()) {
@@ -176,12 +178,9 @@ public class ProjectService {
      * @param tasks
      * @return
      */
-    public Task findByInprojectIdInTasks(final List<Task> tasks, final String inprojectId) {
-        for (Task task : tasks) {
-            if (task.getInprojectId().equals(inprojectId)) {
-                return task;
-            }
-        }
-        return null;
+    public Optional findByInprojectIdInTasks(final List<Task> tasks, final String inprojectId) {
+        return tasks.stream()
+                .filter(t -> t.getInprojectId()!= null && t.getInprojectId().equals(inprojectId))
+                .findAny();
     }
 }

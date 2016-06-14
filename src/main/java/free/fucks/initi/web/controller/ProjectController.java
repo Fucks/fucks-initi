@@ -72,4 +72,10 @@ public class ProjectController {
         return this.projectService.update(project);
     }
 
+    @RequestMapping(value = "/upload", method = RequestMethod.GET)
+    public String provideUploadInfo() {
+
+        return "uploadForm";
+    }
+
 }

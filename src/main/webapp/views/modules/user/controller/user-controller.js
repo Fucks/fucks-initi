@@ -1,6 +1,6 @@
 'use strict';
 
-function UserController($injector, $scope, $state, $stateParams, userService) {
+function UserController($injector, $scope, $state, $stateParams, userService, imageService) {
 
     $injector.invoke(AbstractController, this, {$scope: $scope});
 
@@ -19,6 +19,7 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
     $scope.selected;
     $scope.profiles = {};
     $scope.profile = {};
+    $scope.selectedPhoto = {};
 
     /**
      * 
@@ -163,6 +164,7 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
                     .then(function (response) {
                         response = JSON.parse(response);
                         Materialize.toast(response.msg, 5000);
+                        
                         if (response.code == 200) {
                             $state.go($scope.LIST_STATE);
                         }
@@ -188,7 +190,11 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
             userService.update($scope.currentEntity)
                     .then(function (response) {
                         response = JSON.parse(response);
+                        
+                        $scope.uploadPhoto();
+                        
                         Materialize.toast(response.msg, 5000);
+                        
                         if (response.code == 200) {
                             $state.go($scope.LIST_STATE);
                         }
@@ -229,5 +235,39 @@ function UserController($injector, $scope, $state, $stateParams, userService) {
                     $scope.loadUsers();
                 });
     }
+
+    $scope.uploadPhoto = function () {
+        imageService.upload($scope.selectedPhoto, $scope.currentEntity.id)
+                .then(function (response) {
+                    response = JSON.parse(response);
+                    Materialize.toast(response.msg, 5000)
+                });
+    }
+
+    $scope.setImagem = function (element) {
+
+        /**
+         * Verifica se a extensÃ£o do arquivo
+         */
+        if (!(/\.(gif|jpg|jpeg|bmp|png)$/i).test(element.value)) {
+            Materialize.toast("O tipo de imagem selecionada é inválido.", 5000);
+            return;
+        }
+
+        $scope.readURL(element);
+        $scope.selectedPhoto = element.files[0];
+    };
+
+    $scope.readURL = function (input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#user-image').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+
 }
 ;

@@ -48,6 +48,21 @@
                         <md-option ng-value="profile" ng-selected="currentEntity.profile.name" ng-repeat="profile in profiles">{{profile.name}}</md-option>
                     </md-select>
                 </div>
+                <div class="input-field col s12 m6">
+                    <div class="form-item" style="width: 262px; height: 225px; border: 1px solid #DDDDDD;">
+                        <img id="user-image" style="width: 100%; height: 100%;" ng-src="{{'imagem/files/' + currentEntity.id}}"/>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <input type="file" id="upload-input" style="display:none;"
+                               accept="image/*"
+                               onchange="$(this).scope().setImagem(this)"/>
+                        <button class="btn btn-primary"
+                                onclick="$('#upload-input').click();">
+                            Selecionar imagem
+                        </button>
+                    </div>
+                </div>
                 <div class="input-field col s12">
                     <div class="section right">
                         <div class="col s12">

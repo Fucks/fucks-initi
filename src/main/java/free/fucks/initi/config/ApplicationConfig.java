@@ -5,6 +5,7 @@ import free.fucks.initi.config.data.RepositoryRestConfig;
 import free.fucks.initi.config.security.MethodSecurityConfig;
 import free.fucks.initi.config.security.SecurityConfig;
 import free.fucks.initi.config.web.WebMvcConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 
 /**
  *
@@ -29,6 +31,8 @@ public class ApplicationConfig {
 
     private static final String MESSAGE_SOURCE_BASE_NAME = "i18n/messages";
 
+    public static final String PHOTO_PATH = System.getProperty("catalina.base") + "/";
+
 //    @Bean
 //    MessageSource messageSource() {
 //        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -37,7 +41,6 @@ public class ApplicationConfig {
 //
 //        return messageSource;
 //    }
-
     @Bean
     MessageSource fieldsMessageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

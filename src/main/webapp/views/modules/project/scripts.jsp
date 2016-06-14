@@ -18,6 +18,7 @@
 
 <!-- Directives -->
 <script src="<c:url value="/resource/js/directives/angular-http-loader.js" />" ></script>
+<script src="<c:url value="/resource/js/directives/fileread.js" />" ></script>
 
 <!-- Data table -->
 <script src="<c:url value="/resource/library/md-data-table/md-data-table.min.js" />" ></script>
